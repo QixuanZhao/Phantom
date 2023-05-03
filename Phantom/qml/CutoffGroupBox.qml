@@ -7,11 +7,20 @@ import QtQml.Models
 import Phantom 1.0
 
 GroupBox {
+    id: groupBox
     title: qsTr("Cut-Offs")
     Layout.fillWidth: true
 
     property real innerCutoff: spotlightCutOffSlider.first.value
     property real outerCutoff: spotlightCutOffSlider.second.value
+
+    onInnerCutoffChanged: {
+        spotlightCutOffSlider.first.value = innerCutoff
+    }
+
+    onOuterCutoffChanged: {
+        spotlightCutOffSlider.second.value = outerCutoff
+    }
 
     RowLayout {
 
@@ -27,6 +36,18 @@ GroupBox {
             to: Math.PI / 6
             first.value: Math.PI / 12
             second.value: Math.PI / 10
+
+            first.onMoved: {
+                console.log('first', first.value)
+                groupBox.innerCutoff = first.value
+            }
+
+            second.onMoved: {
+                console.log('second', second.value)
+                groupBox.outerCutoff = second.value
+            }
+
+
         }
 
         Label {

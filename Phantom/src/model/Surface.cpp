@@ -56,10 +56,15 @@ Surface::~Surface() {
     glDeleteBuffers(1, &vertexBuffer);
 }
 
+void Surface::zoom(ObserverCamera& camera) const
+{
+    camera.setDistance(getZoomDistance());
+    camera.setTarget(getZoomTarget());
+}
+
 void Surface::zoom() const
 {
-    Display::display.camera.setDistance(getZoomDistance());
-    Display::display.camera.setTarget(getZoomTarget());
+    zoom(Display::display.observerCamera);
 }
 
 void Surface::loadModel(const QString& path) {

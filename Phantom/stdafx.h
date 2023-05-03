@@ -33,6 +33,7 @@
 #include <QQuickStyle>
 #include <QAbstractItemModel>
 #include <QAbstractListModel>
+#include <QCursor>
 
 using GLF = QOpenGLFunctions_4_5_Core;
 
@@ -71,6 +72,7 @@ using glm::mat4x3;
 #include "post-process/blur/KawaseBlur.h"
 #include "post-process/blur/DualBlur.h"
 
+#include "configuration/Control.h"
 #include "configuration/Debug.h"
 #include "configuration/GLConfiguration.h"
 
@@ -149,7 +151,11 @@ using glm::mat4x3;
 #include "qml/PointLightController.h"
 #include "qml/ShadowCastingPointLightController.h"
 #include "qml/SpotlightController.h"
+
+#include "qml/MouseCameraController.h"
 #include "qml/ObserverCameraController.h"
+#include "qml/FPSCameraController.h"
+
 #include "qml/LightingController.h"
 #include "qml/ShadowController.h"
 #include "qml/DebugController.h"

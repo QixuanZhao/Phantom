@@ -100,7 +100,7 @@ MainRenderer::MainRenderer():
     //glEnable(GL_BLEND); // I'll be back.
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //Display::display.axes.setVisibility(true);
-    Display::display.axes.setLength(Display::display.camera.FAR_PLANE_DISTANCE);
+    Display::display.axes.setLength(Display::display.mouseCamera().FAR_PLANE_DISTANCE);
     Display::display.axes.setupGL();
 
     Lighting::lightSourceSphere = new Object3D("Light Source Sphere");
@@ -126,7 +126,7 @@ MainRenderer::MainRenderer():
 
     Display::horizon = new Surface(quadFaces);
     Display::horizon->setupGL();
-    Display::horizon->setScale(vec3(Display::display.camera.FAR_PLANE_DISTANCE));
+    Display::horizon->setScale(vec3(Display::display.mouseCamera().FAR_PLANE_DISTANCE));
 
     quadFaces.clear();
     quadFaces.push_back({
@@ -197,14 +197,17 @@ MainRenderer::MainRenderer():
 
     Display::skybox = new Surface(quadFaces);
     Display::skybox->setupGL();
-    Display::skybox->setScale(vec3(Display::display.camera.FAR_PLANE_DISTANCE) / 2.0f);
+    Display::skybox->setScale(vec3(Display::display.mouseCamera().FAR_PLANE_DISTANCE) / 2.0f);
 }
 
 void MainRenderer::render()
 {
 	qint64 now = QDateTime::currentMSecsSinceEpoch();
     if (!firstFrame) emit fpsCalculated(1000 / float(now - lastFrame));
+    deltaTime = now - lastFrame;
 	lastFrame = now;
+
+    processKeyboard();
 
     if (firstFrame) firstFrame = false;
 
@@ -266,7 +269,7 @@ void MainRenderer::render()
     }
 
     QSizeF viewportSize = this->viewportSize * window->effectiveDevicePixelRatio();
-    Display::display.camera.setAspectRatio(1.0f * viewportSize.width() / viewportSize.height());
+    Display::display.mouseCamera().setAspectRatio(1.0f * viewportSize.width() / viewportSize.height());
 
     // 2. second pass: render to the scene as normal with shadow mapping (using depth map)
     glViewport(0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT);
@@ -322,7 +325,7 @@ void MainRenderer::render()
         currentSp->set("ambientOcclusionMap", 7);
         currentSp->set("ssaoEnabled", Lighting::lighting.ssaoEnabled);
 
-        Display::display.camera.getFlash().configureShaderProgram(currentSp, "cameraFlash");
+        Display::display.flashCamera().getFlash().configureShaderProgram(currentSp, "cameraFlash");
 
         currentSp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
 
@@ -340,7 +343,7 @@ void MainRenderer::render()
 
         index = 0;
         for (ShadowCastingPointLight& sl : Lighting::lighting.pointLights) {
-            if (index == Lighting::lighting.pickedPointLightIndex) sl.setPosition(Display::display.camera.getTarget());
+            if (index == Lighting::lighting.pickedPointLightIndex) sl.setPosition(Display::display.mouseCamera().getTarget());
             sl.configureShaderProgram(currentSp, QStringLiteral("pointLights[%1]").arg(index));
             glActiveTexture(GL_TEXTURE9 + count);
             glBindTexture(GL_TEXTURE_2D, sl.getShadow().getShadowTexture());
@@ -352,7 +355,7 @@ void MainRenderer::render()
 
         index = 0;
         for (ShadowCastingSpotlight& ss : Lighting::lighting.spotlights) {
-            if (index == Lighting::lighting.pickedSpotlightIndex) ss.setPosition(Display::display.camera.getTarget());
+            if (index == Lighting::lighting.pickedSpotlightIndex) ss.setPosition(Display::display.mouseCamera().getTarget());
             ss.configureShaderProgram(currentSp, QStringLiteral("spotlights[%1]").arg(index));
             glActiveTexture(GL_TEXTURE9 + count);
             glBindTexture(GL_TEXTURE_2D, ss.getShadow().getShadowTexture());
@@ -362,8 +365,8 @@ void MainRenderer::render()
 
         currentSp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
 
-        currentSp->set("cameraPosition", Display::display.camera.getPosition());
-        currentSp->set("cameraFlashOn", Display::display.camera.isFlashOn());
+        currentSp->set("cameraPosition", Display::display.mouseCamera().getPosition());
+        currentSp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
 
         currentSp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
         
@@ -381,7 +384,7 @@ void MainRenderer::render()
         // forward rendering 
         sp->set("pointLightShadowMap", 1);
 
-        Display::display.camera.configureShaderProgram(sp);
+        Display::display.mouseCamera().configureShaderProgram(sp);
 
         sp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
         int index = 0;
@@ -403,12 +406,12 @@ void MainRenderer::render()
             index++;
         }
 
-        Display::display.camera.getFlash().configureShaderProgram(sp, "cameraFlash");
+        Display::display.flashCamera().getFlash().configureShaderProgram(sp, "cameraFlash");
 
         sp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
 
-        sp->set("cameraPosition", Display::display.camera.getPosition());
-        sp->set("cameraFlashOn", Display::display.camera.isFlashOn());
+        sp->set("cameraPosition", Display::display.mouseCamera().getPosition());
+        sp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
 
         sp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
         sp->set("blinnPhong", Lighting::lighting.blinnPhong);
@@ -427,14 +430,14 @@ void MainRenderer::render()
         glCullFace(GL_BACK);
         Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
         float zoomDistance = Data::getInstance().getZoomDistance();
-        if (zoomDistance < 1e-6f) zoomDistance = Display::display.camera.FAR_PLANE_DISTANCE;
+        if (zoomDistance < 1e-6f) zoomDistance = Display::display.mouseCamera().FAR_PLANE_DISTANCE;
         Display::horizon->setScale(vec3(zoomDistance));
         Display::horizon->draw(*sp);
     }
 
     /// light sources
     glLineWidth(1.0f);
-    Display::display.camera.configureShaderProgram(lightSourceSp);
+    Display::display.mouseCamera().configureShaderProgram(lightSourceSp);
 
     int lightSourceCount = 1;
     lightSourceSp->set("spotlight", false);
@@ -454,7 +457,7 @@ void MainRenderer::render()
     }
 
     /// axes
-    Display::display.camera.configureShaderProgram(axisSp);
+    Display::display.mouseCamera().configureShaderProgram(axisSp);
     Display::display.axes.draw(*axisSp);
 
     // bloom blur
@@ -593,4 +596,57 @@ void MainRenderer::render()
     glDisable(GL_BLEND);
 
 	update();
+}
+
+void MainRenderer::processKeyboard()
+{
+    if (!Display::display.observerMode) {
+        int horizontalMove = 0;
+        int verticalMove = 0;
+
+        float dtime = deltaTime / 100.0f;
+
+        if (Control::control.pressedKeys.contains(Qt::Key::Key_Shift)) dtime *= 10.0f;
+
+        if (Control::control.pressedKeys.contains(Qt::Key::Key_W) ||
+            Control::control.pressedKeys.contains(Qt::Key::Key_Up)) {
+            verticalMove++;
+        }
+
+        if (Control::control.pressedKeys.contains(Qt::Key::Key_S) ||
+            Control::control.pressedKeys.contains(Qt::Key::Key_Down)) {
+            verticalMove--;
+        }
+
+        if (Control::control.pressedKeys.contains(Qt::Key::Key_D) ||
+            Control::control.pressedKeys.contains(Qt::Key::Key_Right)) {
+            horizontalMove++;
+        }
+
+        if (Control::control.pressedKeys.contains(Qt::Key::Key_A) ||
+            Control::control.pressedKeys.contains(Qt::Key::Key_Left)) {
+            horizontalMove--;
+        }
+
+        if (horizontalMove > 0) 
+            if (verticalMove > 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::FORWARD_RIGHT, dtime);
+            else if (verticalMove < 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::BACKWARD_RIGHT, dtime);
+            else
+                Display::display.fpsCamera.move(FPSCamera::Direction::RIGHT, dtime);
+        else if (horizontalMove < 0)
+            if (verticalMove > 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::FORWARD_LEFT, dtime);
+            else if (verticalMove < 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::BACKWARD_LEFT, dtime);
+            else
+                Display::display.fpsCamera.move(FPSCamera::Direction::LEFT, dtime);
+        else
+            if (verticalMove > 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::FORWARD, dtime);
+            else if (verticalMove < 0)
+                Display::display.fpsCamera.move(FPSCamera::Direction::BACKWARD, dtime);
+
+    }
 }

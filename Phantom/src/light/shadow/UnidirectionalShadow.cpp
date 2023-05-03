@@ -107,8 +107,8 @@ void UnidirectionalShadow::updateShadow(ShaderProgram* sp)
         Display::screenQuad->draw(*sp);
     }
     else {
-        sp->set("view", Display::display.camera.getView());
-        sp->set("projection", Display::display.camera.getProjection());
+        sp->set("view", Display::display.observerCamera.getView());
+        sp->set("projection", Display::display.observerCamera.getProjection());
         glDisable(GL_CULL_FACE);
         for (Object3D* object : Data::getInstance().getObjects())
             object->draw(*sp);
@@ -117,7 +117,7 @@ void UnidirectionalShadow::updateShadow(ShaderProgram* sp)
         glCullFace(GL_BACK);
         Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
         float zoomDistance = Data::getInstance().getZoomDistance();
-        if (zoomDistance < 1e-6f) zoomDistance = Display::display.camera.FAR_PLANE_DISTANCE;
+        if (zoomDistance < 1e-6f) zoomDistance = Display::display.observerCamera.FAR_PLANE_DISTANCE;
         Display::horizon->setScale(vec3(zoomDistance));
         Display::horizon->draw(*sp);
         glDisable(GL_CULL_FACE);

@@ -26,7 +26,7 @@ public:
 	Q_INVOKABLE inline void moveTop(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
+		const vec3& up = Display::display.observerCamera.getUp();
 		const vec3& newPosition = lightPosition + float(speed) * up;
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -35,7 +35,7 @@ public:
 	Q_INVOKABLE inline void moveBottom(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
+		const vec3& up = Display::display.observerCamera.getUp();
 		const vec3& newPosition = lightPosition - float(speed) * up;
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -44,7 +44,7 @@ public:
 	Q_INVOKABLE inline void moveLeft(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition - float(speed) * right;
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -53,7 +53,7 @@ public:
 	Q_INVOKABLE inline void moveRight(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition + float(speed) * right;
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -62,8 +62,8 @@ public:
 	Q_INVOKABLE inline void moveTopLeft(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& up = Display::display.observerCamera.getUp();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition + float(speed) * glm::normalize(up - right);
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -72,8 +72,8 @@ public:
 	Q_INVOKABLE inline void moveTopRight(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& up = Display::display.observerCamera.getUp();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition + float(speed) * glm::normalize(up + right);
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -82,8 +82,8 @@ public:
 	Q_INVOKABLE inline void moveBottomLeft(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& up = Display::display.observerCamera.getUp();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition - float(speed) * glm::normalize(up + right);
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));
@@ -92,8 +92,8 @@ public:
 	Q_INVOKABLE inline void moveBottomRight(const qreal& speed) {
 		if (!light) return;
 		const vec3& lightPosition = light->getPosition();
-		const vec3& up = Display::display.camera.getUp();
-		const vec3& right = Display::display.camera.getRight();
+		const vec3& up = Display::display.observerCamera.getUp();
+		const vec3& right = Display::display.observerCamera.getRight();
 		const vec3& newPosition = lightPosition + float(speed) * glm::normalize(right - up);
 		light->setPosition(newPosition);
 		emit positionChanged(QVector3D(newPosition.x, newPosition.y, newPosition.z));

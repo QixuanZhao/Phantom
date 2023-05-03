@@ -5,13 +5,18 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon(":/static/res/icons/ev_shadow_FILL0_wght400_GRAD0_opsz48.svg"));
 
+    app.overrideCursor();
+
     QTranslator translator;
     if (translator.load(QLocale::system(), "Translation", "_", ":/i18n"))
         app.installTranslator(&translator);
 
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
     qmlRegisterType<RenderingFramebufferObject>("Phantom", 1, 0, "Renderer");
-    qmlRegisterType<ObserverCameraController>("Phantom", 1, 0, "Camera");
+    
+    qmlRegisterType<MouseCameraController>("Phantom", 1, 0, "Camera");
+    qmlRegisterType<ObserverCameraController>("Phantom", 1, 0, "ObserverCamera");
+    qmlRegisterType<FPSCameraController>("Phantom", 1, 0, "FPSCamera");
     qmlRegisterType<AxesController>("Phantom", 1, 0, "Axes");
     qmlRegisterType<DisplayController>("Phantom", 1, 0, "Display");
     qmlRegisterType<AmbientLightController>("Phantom", 1, 0, "AmbientLight");

@@ -174,7 +174,7 @@ bool PointLightModel::insertRows(int row, int count, const QModelIndex& parent)
 	light.setSpecular(vec3(1.0f));
 	light.setColour(vec3(1.0f));
 	light.setPower(1.0f);
-	light.setPosition(Display::display.camera.getTarget());
+	light.setPosition(Display::display.observerCamera.getTarget());
 	list<ShadowCastingPointLight>::const_iterator it = Lighting::lighting.pointLights.cbegin();
 	for (int i = 0; i < row; i++, ++it);
 	Lighting::lighting.pointLights.insert(it, count, light);

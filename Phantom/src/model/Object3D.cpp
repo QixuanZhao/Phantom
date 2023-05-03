@@ -43,7 +43,12 @@ void Object3D::computeAABB() {
 
 }
 
-void Object3D::zoom() const {
-	Display::display.camera.setTarget(getZoomTarget());
-	Display::display.camera.setDistance(getZoomDistance());
+void Object3D::zoom (ObserverCamera& camera) const {
+	camera.setTarget(getZoomTarget());
+	camera.setDistance(getZoomDistance());
+}
+
+void Object3D::zoom() const
+{
+	zoom(Display::display.observerCamera);
 }

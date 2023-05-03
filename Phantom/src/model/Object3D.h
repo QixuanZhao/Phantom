@@ -4,6 +4,7 @@
 #define OBJECT_3D_H
 
 class Display;
+class ObserverCamera;
 
 class Object3D
 {
@@ -46,6 +47,7 @@ public:
 	inline vec3 getZoomTarget() const { return translation + (aabb.max + aabb.min) / 2.0f; }
 	inline float getZoomDistance() const { return glm::length(aabb.max - aabb.min); }
 
+	void zoom(ObserverCamera& camera) const;
 	void zoom() const;
 
 	inline void setFaceCullingEnabled(bool enabled) { this->faceCullingEnabled = enabled; }

@@ -41,7 +41,7 @@ ListView {
             }
             RoundButton {
                 flat: true
-                enabled: controller.model.count > 0
+                enabled: controller.model.count > 0 && controller.cameraType === Controller.CameraType.Observer
                 icon.source: "qrc:/static/res/icons/travel_explore_FILL0_wght400_GRAD0_opsz48.svg"
                 display: AbstractButton.IconOnly
                 onClicked: { controller.camera.zoom(); }
@@ -84,7 +84,10 @@ ListView {
             text: name
             Layout.fillWidth: true
             onClicked: modelListView.currentIndex = index
-            onDoubleClicked: controller.camera.zoom(name);
+            onDoubleClicked: {
+                if (controller.cameraType === Controller.CameraType.Observer)
+                    controller.camera.zoom(name);
+            }
         }
         RoundButton {
             flat: true

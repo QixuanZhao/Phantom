@@ -50,7 +50,7 @@ void SSAO::render()
 	glBindTexture(GL_TEXTURE_2D, gBuffer->depthTexture());
 
 	//Display::display.camera.configureShaderProgram(sp);
-	sp->set("projection", Display::display.camera.getProjection());
+	sp->set("projection", Display::display.mouseCamera().getProjection());
 	sp->set("input_position_view", 0);
 	sp->set("input_normal_view", 1);
 	sp->set("input_depth", 2);
@@ -58,7 +58,7 @@ void SSAO::render()
 	sp->set("kernelSize", Lighting::lighting.ssaoFilterSize);
 	sp->set("autoRadius", Lighting::lighting.ssaoRadiusFollowingCamera);
 	if (Lighting::lighting.ssaoRadiusFollowingCamera) {
-		sp->set("cDistance", Display::display.camera.getDistance());
+		sp->set("cDistance", Display::display.observerCamera.getDistance());
 	}
 	else sp->set("radius", Lighting::lighting.ssaoRadius);
 

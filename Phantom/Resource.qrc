@@ -21,6 +21,7 @@
         <file>qml/SpotlightList.qml</file>
         <file>qml/CutoffGroupBox.qml</file>
         <file>qml/AnalyticalLightTree.qml</file>
+        <file>qml/CameraPanel.qml</file>
     </qresource>
     <qresource prefix="/static">
         <file>res/icons/arrow_back_FILL0_wght400_GRAD0_opsz48.svg</file>

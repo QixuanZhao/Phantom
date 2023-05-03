@@ -1,29 +1,14 @@
 #include "stdafx.h"
 
 ObserverCamera::ObserverCamera(
-    const FlashCamera& flashCamera,
-    const float& sensitivity,
-    const float& distance,
-    const vec3& target
-) : Camera(flashCamera),
-    MouseCamera(flashCamera, sensitivity),
-    FlashCamera(flashCamera),
-    distance(distance),
-    target(target),
-    distanceFactor(distance / 13.78f)
-{ }
-
-ObserverCamera::ObserverCamera(
     const Camera& camera,
     const Spotlight& flash,
     const float& sensitivity,
     const float& distance,
     const vec3& target
 ) : Camera(camera),
-    MouseCamera(camera, sensitivity),
-    FlashCamera(camera, flash),
-    distance(distance),
-    target(target)
+    MouseCamera(camera, sensitivity, distance, target),
+    FlashCamera(camera, flash)
 {
     computeDistanceFactor(distance);
 }

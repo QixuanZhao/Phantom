@@ -192,8 +192,8 @@ bool SpotlightModel::insertRows(int row, int count, const QModelIndex& parent)
 	light.setSpecular(vec3(1.0f));
 	light.setColour(vec3(1.0f));
 	light.setPower(1.0f);
-	light.setPosition(Display::display.camera.getTarget());
-	light.setDirection(Display::display.camera.getFront());
+	light.setPosition(Display::display.observerCamera.getTarget());
+	light.setDirection(Display::display.observerCamera.getFront());
 	list<ShadowCastingSpotlight>::const_iterator it = Lighting::lighting.spotlights.cbegin();
 	for (int i = 0; i < row; i++, ++it);
 	Lighting::lighting.spotlights.insert(it, count, light);

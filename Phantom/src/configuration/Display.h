@@ -21,7 +21,11 @@ public:
 
 	vec3 backgroundColour;
 
-	ObserverCamera camera;
+	ObserverCamera observerCamera;
+	FPSCamera fpsCamera;
+
+	bool observerMode = true;
+	bool catchMouse = false;
 
 	const int TEXTURE_WIDTH = 1920;
 	const int TEXTURE_HEIGHT = 1080;
@@ -40,6 +44,16 @@ public:
 	bool toneMappingEnabled = true;
 	float exposure = 1.0f;
 	ToneMappingMethod toneMappingMethod = ToneMappingMethod::Exposure;
+
+	inline MouseCamera& mouseCamera() {
+		if (observerMode) return observerCamera;
+		else return fpsCamera;
+	}
+
+	inline FlashCamera& flashCamera() {
+		if (observerMode) return observerCamera;
+		else return fpsCamera;
+	}
 };
 
 #endif

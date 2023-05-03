@@ -127,6 +127,12 @@
     <Filter Include="Header\Camera">
       <UniqueIdentifier>{35e36671-60be-4da0-a839-3fde93b2fa75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QML\Headers\Camera">
+      <UniqueIdentifier>{b54f485b-ae7f-476b-93d7-0c4ccff4f1ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\Source\Camera">
+      <UniqueIdentifier>{9b3f3738-5e45-4c9b-b6f1-c05fb7c7702b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">
@@ -232,9 +238,6 @@
     <ClCompile Include="src\qml\DataController.cpp">
       <Filter>QML\Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\qml\ObserverCameraController.cpp">
-      <Filter>QML\Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\qml\AxesController.cpp">
       <Filter>QML\Source</Filter>
     </ClCompile>
@@ -279,6 +282,18 @@
     </ClCompile>
     <ClCompile Include="src\model\AnalyticalLightTreeModel.cpp">
       <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ObserverCameraController.cpp">
+      <Filter>QML\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\FPSCameraController.cpp">
+      <Filter>QML\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\MouseCameraController.cpp">
+      <Filter>QML\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\Control.cpp">
+      <Filter>Source\Configuration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -327,9 +342,6 @@
     <QtMoc Include="src\qml\AxesController.h">
       <Filter>QML\Headers</Filter>
     </QtMoc>
-    <QtMoc Include="src\qml\ObserverCameraController.h">
-      <Filter>QML\Headers</Filter>
-    </QtMoc>
     <QtMoc Include="src\qml\DataController.h">
       <Filter>QML\Headers</Filter>
     </QtMoc>
@@ -353,6 +365,15 @@
     </QtMoc>
     <QtMoc Include="src\model\AnalyticalLightTreeModel.h">
       <Filter>Header\Model</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ObserverCameraController.h">
+      <Filter>QML\Headers\Camera</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\FPSCameraController.h">
+      <Filter>QML\Headers\Camera</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\MouseCameraController.h">
+      <Filter>QML\Headers\Camera</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -473,6 +494,9 @@
       <Filter>QML</Filter>
     </None>
     <None Include="qml\AnalyticalLightTree.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\CameraPanel.qml">
       <Filter>QML</Filter>
     </None>
   </ItemGroup>
@@ -621,6 +645,9 @@
     </ClInclude>
     <ClInclude Include="src\light\shadow\PerspectiveShadow.h">
       <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\configuration\Control.h">
+      <Filter>Header\Configuration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

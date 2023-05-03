@@ -41,7 +41,7 @@ void Data::zoom(OrthographicShadow& shadow) const
 
 void Data::zoom() const
 {
-	zoom(Display::display.camera);
+	zoom(Display::display.observerCamera);
 }
 
 void Data::insertObject(Object3D* object) {

@@ -70,8 +70,7 @@ void GBuffer::render()
 	//glDisable(GL_CULL_FACE);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	sp->set("view", Display::display.camera.getView());
-	sp->set("projection", Display::display.camera.getProjection());
+	Display::display.mouseCamera().configureShaderProgram(sp);
 	//if (Lighting::lighting.parallelLights.size() > 0) {
 	//	sp->set("lightPV", Lighting::lighting.parallelLights.front().getShadow().getPV());
 	//}
@@ -84,7 +83,7 @@ void GBuffer::render()
 
 	Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
 	float zoomDistance = Data::getInstance().getZoomDistance();
-	if (zoomDistance < 1e-6f) zoomDistance = Display::display.camera.FAR_PLANE_DISTANCE;
+	if (zoomDistance < 1e-6f) zoomDistance = Display::display.observerCamera.FAR_PLANE_DISTANCE;
 	Display::horizon->setScale(vec3(zoomDistance));
 	Display::horizon->draw(*sp);
 }

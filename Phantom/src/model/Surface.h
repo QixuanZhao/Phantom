@@ -1,20 +1,12 @@
 ﻿#include "stdafx.h"
 #pragma once
 
-/**
- * @file    Surface.h
- * @brief   This file declares the Surface class. <br/>
- *          此文件声明 Surface 类。
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
 #ifndef SURFACE_H
 #define SURFACE_H
 
-/**
- * @class Surface
- * @brief 3d model surface class <br/> 三维模型表面类
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
+class Display;
+class ObserverCamera;
+
 class Surface : protected GLF
 {
 public:
@@ -83,6 +75,7 @@ public:
     inline const vec3& getScale() const { return scale; }
     inline void setScale(const vec3& scale) { this->scale = scale; }
 
+    void zoom(ObserverCamera& camera) const;
     void zoom() const;
 
     inline bool isAvailable() const { return available; }

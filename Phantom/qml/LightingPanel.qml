@@ -23,19 +23,6 @@ Item {
         controller.lighting.ambientLight.ssaoBlurPassCount = Qt.binding(() => ssaoBlurSlider.value)
         controller.lighting.ambientLight.ssaoBlurAlgorithm = Qt.binding(() => ssaoBlurAlgorithmComboBox.currentValue)
 
-        controller.camera.flashOn = Qt.binding(() => spotlightSwitch.checked)
-
-        controller.camera.flash.colour = Qt.binding(() => spotlightRadiantFluxGroupBox.colour)
-        controller.camera.flash.power = Qt.binding(() => spotlightRadiantFluxGroupBox.power)
-        controller.camera.flash.specular = Qt.binding(() => spotlightRadiantFluxGroupBox.flux)
-        controller.camera.flash.diffuse = Qt.binding(() => spotlightRadiantFluxGroupBox.flux)
-
-        controller.camera.flash.constant = Qt.binding(() => spotlightConstantSlider.value)
-        controller.camera.flash.linear = Qt.binding(() => spotlightLinearSlider.value)
-        controller.camera.flash.quadratic = Qt.binding(() => spotlightQuadraticSlider.value)
-        controller.camera.flash.innerCutOff = Qt.binding(() => spotlightCutoffGroupBox.innerCutoff)
-        controller.camera.flash.outerCutOff = Qt.binding(() => spotlightCutoffGroupBox.outerCutoff)
-
         controller.shadow.shadowEnabled = Qt.binding(() => shadowSwitch.checked)
         controller.shadow.linearFilterEnabled = Qt.binding(() => shadowLinearFilterSwitch.checked)
         controller.shadow.filterSize = Qt.binding(() => shadowFilterSizeSlider.value)
@@ -66,52 +53,41 @@ Item {
             spacing: 6
             anchors.horizontalCenter: parent.horizontalCenter
 
-            GroupBox {
-                title: qsTr("Global Lighting Settings")
-                Layout.fillWidth: true
+            Switch {
+                id: blinnPhongSwitch
+                enabled: !controller.graphics.pbrEnabled
+                checked: true
+                text: "Blinn-Phong %1".arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
+            }
 
-                GridLayout {
-                    width: parent.width
-                    rowSpacing: 0
-                    columns: 2
+            Switch {
+                id: bilaterallyReflectiveSwitch
+                checked: true
+                text: qsTr("Bilaterally Reflective %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
+            }
 
-                    Switch {
-                        id: blinnPhongSwitch
-                        enabled: !controller.graphics.pbrEnabled
-                        checked: true
-                        text: "Blinn-Phong %1".arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
-                    }
-
-                    Switch {
-                        id: bilaterallyReflectiveSwitch
-                        checked: true
-                        text: qsTr("Bilaterally Reflective %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
-                    }
-
-                    Switch {
-                        id: bloomSwitch
-                        checked: true
-                        text: qsTr("Bloom %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
-                    }
-                }
+            Switch {
+                id: bloomSwitch
+                checked: true
+                text: qsTr("Bloom %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
             }
 
             GroupBox {
                 title: qsTr("Global Shadow Settings")
                 Layout.fillWidth: true
 
+                label: Switch {
+                    id: shadowSwitch
+                    checked: true
+                    text: qsTr("Shadow %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
+                }
+
                 ColumnLayout {
                     width: parent.width
-
-                    Switch {
-                        id: shadowSwitch
-                        checked: true
-                        text: qsTr("Shadow %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
-                    }
+                    enabled: shadowSwitch.checked
 
                     Switch {
                         id: shadowLinearFilterSwitch
-                        enabled: shadowSwitch.checked
                         checked: false
                         text: qsTr("Linear Magnification Filter %1").arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
                     }
@@ -148,7 +124,6 @@ Item {
 
                     RowLayout {
                         width: parent.width
-                        enabled: shadowSwitch.checked
 
                         Switch {
                             id: shadowSamplingSwitch
@@ -171,7 +146,8 @@ Item {
 
                     RowLayout {
                         width: parent.width
-                        enabled: shadowSwitch.checked && shadowSamplingSwitch.checked
+                        enabled: shadowSamplingSwitch.checked
+
                         visible: shadowSamplingMethodComboBox.currentValue === 0
                         Label { text: qsTr("Filter Size") }
                         Slider {
@@ -196,7 +172,7 @@ Item {
 
                     RowLayout {
                         width: parent.width
-                        enabled: shadowSwitch.checked && shadowSamplingSwitch.checked
+                        enabled: shadowSamplingSwitch.checked
                         visible: shadowSamplingMethodComboBox.currentValue === 1
 
                         Switch {
@@ -207,7 +183,7 @@ Item {
 
                     GridLayout {
                         width: parent.width
-                        enabled: shadowSwitch.checked && shadowSamplingSwitch.checked
+                        enabled: shadowSamplingSwitch.checked
                         columns: 3
                         rowSpacing: 0
 
@@ -331,156 +307,6 @@ Item {
                             model: blurAlgorithmListModel
                             currentIndex: 3
                         }
-                    }
-                }
-            }
-        }
-
-        Column {
-            id: spotlightColumn
-            spacing: 0
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            Button {
-                id: spotlightToggler
-                checkable: true
-                checked: false
-                text: qsTr("Spotlight")
-                width: spotlightItem.width
-            }
-
-            Item {
-                id: spotlightItem
-                visible: spotlightToggler.checked
-                implicitWidth: childrenRect.width
-                implicitHeight: childrenRect.height
-
-                ColumnLayout {
-                    anchors.top: parent.top
-
-                    Switch {
-                        id: spotlightSwitch
-                        Layout.fillWidth: true
-                        text: qsTr("Power %1").arg(checked? qsTr("On"): qsTr("Off"))
-                    }
-
-                    GroupBox {
-                        title: qsTr("Attenuate Coefficients")
-                        Layout.fillWidth: true
-
-                        GridLayout {
-
-                            Label {
-                                Layout.row: 0
-                                Layout.column: 0
-                                Layout.alignment: Qt.AlignLeading
-                                text: qsTr("Constant")
-                            }
-
-                            Slider {
-                                id: spotlightConstantSlider
-                                Layout.row: 0
-                                Layout.column: 1
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                orientation: Qt.Horizontal
-                                from: 1
-                                to: 10
-                                value: spotlightConstantSpinBox.value
-                                stepSize: 1e-2
-                                onValueChanged: { spotlightConstantSpinBox.value = value }
-                            }
-
-                            RealSpinBox {
-                                id: spotlightConstantSpinBox
-                                Layout.row: 0
-                                Layout.column: 2
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                from: spotlightConstantSlider.from
-                                to: spotlightConstantSlider.to
-                                stepSize: spotlightConstantSlider.stepSize
-                                value: 5
-                            }
-
-                            Label {
-                                Layout.row: 1
-                                Layout.column: 0
-                                Layout.alignment: Qt.AlignLeading
-                                text: qsTr("Linear")
-                            }
-
-                            Slider {
-                                id: spotlightLinearSlider
-                                Layout.row: 1
-                                Layout.column: 1
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                orientation: Qt.Horizontal
-                                from: 0
-                                to: 10
-                                value: spotlightLinearSpinBox.value
-                                stepSize: 1e-2
-                                onValueChanged: { spotlightLinearSpinBox.value = value }
-                            }
-
-                            RealSpinBox {
-                                id: spotlightLinearSpinBox
-                                Layout.row: 1
-                                Layout.column: 2
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                from: spotlightLinearSlider.from
-                                to: spotlightLinearSlider.to
-                                stepSize: spotlightLinearSlider.stepSize
-                                value: 0
-                            }
-
-                            Label {
-                                Layout.row: 2
-                                Layout.column: 0
-                                Layout.alignment: Qt.AlignLeading
-                                text: qsTr("Quadratic")
-                            }
-
-                            Slider {
-                                id: spotlightQuadraticSlider
-                                Layout.row: 2
-                                Layout.column: 1
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                orientation: Qt.Horizontal
-                                from: 0
-                                to: 10
-                                value: spotlightQuadraticSpinBox.value
-                                stepSize: 1e-2
-                                onValueChanged: { spotlightQuadraticSpinBox.value = value }
-                            }
-
-                            RealSpinBox {
-                                id: spotlightQuadraticSpinBox
-                                Layout.row: 2
-                                Layout.column: 2
-                                Layout.alignment: Qt.AlignCenter
-                                Layout.fillWidth: true
-                                from: spotlightQuadraticSlider.from
-                                to: spotlightQuadraticSlider.to
-                                stepSize: spotlightQuadraticSlider.stepSize
-                                value: 0
-                            }
-
-
-                        }
-                    }
-
-                    CutoffGroupBox {
-                        id: spotlightCutoffGroupBox
-                    }
-
-                    RadiantFluxGroupBox {
-                        id: spotlightRadiantFluxGroupBox
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
                     }
                 }
             }

@@ -1,33 +1,30 @@
 ﻿#include "stdafx.h"
 #pragma once
 
-/**
- * @file    MouseCamera.hpp
- * @brief   This file defines the MouseCamera class. <br/>
- *          此文件定义 MouseCamera 类。
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
 #ifndef MOUSE_CAMERA_HPP
 #define MOUSE_CAMERA_HPP
 
-/**
- * @class MouseCamera
- * @brief Abstract class representing a camera reacting to mouse events. <br/>
- *        表示一个对鼠标做出反应的相机。
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
 class MouseCamera : virtual public Camera {
 protected:
     double lastX = 0.0;
     double lastY = 0.0;
 
+    float distance;
+    vec3 target;
+
     float sensitivity;
+
+    bool viewLock = true;
 public:
     inline MouseCamera(
         const Camera& camera,
-        const float& sensitivity = 1.13f
+        const float& sensitivity = 1.13f,
+        const float& distance = 10.0f,
+        const vec3& target = vec3(0.0f)
     ) : Camera(camera),
-        sensitivity(sensitivity)
+        sensitivity(sensitivity),
+        distance(distance),
+        target(target)
     { }
 
     inline MouseCamera(
@@ -37,7 +34,9 @@ public:
         const vec3& position = vec3(0.0f),
         const float& fov = 45.0f,
         const float& aspectRatio = 16.0f / 9.0f,
-        const float& sensitivity = 0.13f
+        const float& sensitivity = 0.13f,
+        const float& distance = 10.0f,
+        const vec3 & target = vec3(0.0f)
     ) : Camera(
             pitch,
             yaw,
@@ -46,7 +45,9 @@ public:
             fov,
             aspectRatio
         ), 
-        sensitivity(sensitivity)
+        sensitivity(sensitivity),
+        distance(distance),
+        target(target)
     { }
 
     inline void setSensitivity(const float& sensitivity) { this->sensitivity = sensitivity; }
@@ -56,7 +57,15 @@ public:
     inline double getLastX() const { return lastX; }
     inline double getLastY() const { return lastY; }
 
+    inline float getDistance() const { return distance; }
+    inline const vec3& getTarget() const { return target; }
+
+    inline void lockView() { this->viewLock = true; }
+    inline void unlockView() { this->viewLock = false; }
+    inline bool isViewLocked() const { return viewLock; }
+
     virtual void mouse(double x, double y) = 0;
     virtual void scroll(double dy) = 0;
+
 };
 #endif

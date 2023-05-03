@@ -20,6 +20,8 @@ signals:
 protected:
 	virtual void render() override;
 
+    void processKeyboard();
+
     GLuint hdrFramebuffer;
     GLuint hdrDepthRenderbuffer;
     GLuint hdrTexture;
@@ -61,6 +63,7 @@ protected:
 private:
     bool firstFrame = true;
 	qint64 lastFrame = 0;
+    qint64 deltaTime = 1;
 
     QQuickWindow* window = nullptr;
     QSizeF viewportSize;

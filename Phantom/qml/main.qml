@@ -81,6 +81,7 @@ ApplicationWindow {
                         Layout.minimumHeight: childrenRect.height
 
                         TabButton { text: qsTr("Display") }
+                        TabButton { text: qsTr("Camera") }
                         TabButton { text: qsTr("Lighting") }
                         TabButton { text: qsTr("Graphics") }
                     }
@@ -110,6 +111,19 @@ ApplicationWindow {
 
                             DisplayPanel {
                                 id: displayPanel
+                                implicitWidth: parent.width
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+
+                        ScrollView {
+                            id: cameraScrollView
+                            ScrollBar.vertical.interactive: false
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+
+                            CameraPanel {
+                                id: cameraPanel
                                 implicitWidth: parent.width
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
@@ -225,27 +239,77 @@ ApplicationWindow {
 
             MouseArea {
                 id: rendererMouse
+                focus: true
                 anchors.fill: parent
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
+                cursorShape: Qt.OpenHandCursor
                 hoverEnabled: true
+
+                property bool observerMode: controller.cameraType === Controller.CameraType.Observer
+                property bool catchMouse: false
+
+                onObserverModeChanged: {
+                    if (observerMode) {
+                        cursorShape = Qt.OpenHandCursor
+                        catchMouse = false
+                    } else {
+                        cursorShape = Qt.ArrowCursor
+                    }
+                }
+
+                Keys.onPressed: event => {
+                    if (!event.isAutoRepeat)
+                        controller.press(event.key);
+                    if (event.modifiers & Qt.ControlModifier) {
+                        if (!observerMode) {
+                            catchMouse = !catchMouse
+                            cursorShape = catchMouse ? Qt.BlankCursor : Qt.ArrowCursor
+
+                            if (catchMouse) controller.grabCursor()
+                            else controller.releaseCursor()
+
+                            controller.camera.viewLock = !catchMouse
+                            event.accepted = true
+                        }
+                    }
+                }
+
+                Keys.onReleased: event => {
+                    if (!event.isAutoRepeat) controller.release(event.key);
+                }
+
                 onPressed: (mouse) => {
-                    controller.camera.setMouse(Qt.point(mouse.x, mouse.y))
-                    if (mouse.button === Qt.LeftButton)
-                        controller.camera.viewLock = false
-                    else if (mouse.button === Qt.RightButton)
-                        controller.camera.translationLock = false
+                    forceActiveFocus()
+                    controller.camera.setMouse(mapToGlobal(Qt.point(mouse.x, mouse.y)))
+
+                    if (observerMode) {
+                        rendererMouse.cursorShape = Qt.ClosedHandCursor
+                        if (mouse.button === Qt.LeftButton)
+                            controller.camera.viewLock = false
+                        else if (mouse.button === Qt.RightButton)
+                            controller.observerCamera.translationLock = false
+                    }
                 }
                 onReleased: (mouse) => {
-                    if (mouse.button === Qt.LeftButton)
-                        controller.camera.viewLock = true
-                    else if (mouse.button === Qt.RightButton)
-                        controller.camera.translationLock = true
+                    forceActiveFocus()
+                    if (observerMode) {
+                        rendererMouse.cursorShape = Qt.OpenHandCursor
+
+                        if (mouse.button === Qt.LeftButton)
+                            controller.camera.viewLock = true
+                        else if (mouse.button === Qt.RightButton)
+                            controller.observerCamera.translationLock = true
+                    }
                 }
                 onWheel: (wheel) => {
                     controller.camera.wheel(wheel.angleDelta)
                 }
                 onPositionChanged: (mouse) => {
-                    controller.camera.mouse(Qt.point(mouse.x, mouse.y))
+                    controller.camera.mouse(mapToGlobal(Qt.point(mouse.x, mouse.y)))
+                    if (catchMouse) {
+                        controller.controlCursor(
+                            mapToGlobal(Qt.point(rendererMouse.width / 2, rendererMouse.height / 2)))
+                    }
                 }
             }
 
@@ -286,13 +350,13 @@ ApplicationWindow {
                 Label {
                     color: "white"
                     wrapMode: Text.WordWrap
-                    text: qsTr("Distance: %1").arg(controller.camera.distance)
+                    text: qsTr("Distance: %1").arg(controller.observerCamera.distance)
                 }
 
                 Label {
                     color: "white"
                     wrapMode: Text.WordWrap
-                    text: qsTr("Target: (%1, %2, %3)").arg(controller.camera.target.x).arg(controller.camera.target.y).arg(controller.camera.target.z)
+                    text: qsTr("Target: (%1, %2, %3)").arg(controller.observerCamera.target.x).arg(controller.observerCamera.target.y).arg(controller.observerCamera.target.z)
                 }
             }
 

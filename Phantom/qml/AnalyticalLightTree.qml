@@ -56,6 +56,10 @@ TreeView {
                 visible: isSpotlight(dialog.type) || isParallelLight(dialog.type)
             }
 
+            Label {
+                text: "%1, %2".arg(spotlightCutoffGroupBox.innerCutoff).arg(spotlightCutoffGroupBox.outerCutoff)
+            }
+
             CutoffGroupBox {
                 id: spotlightCutoffGroupBox
                 visible: isSpotlight(dialog.type)
@@ -233,6 +237,7 @@ TreeView {
                         directionGroupBox.azimuth = direction.x
                         directionGroupBox.altitude = direction.y
                         if (isSpotlight(type)) {
+                            console.log("cutoff", cutoff.x, cutoff.y)
                             spotlightCutoffGroupBox.innerCutoff = cutoff.x
                             spotlightCutoffGroupBox.outerCutoff = cutoff.y
                         }

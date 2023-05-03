@@ -7,7 +7,7 @@ class RenderingFramebufferObject : public QQuickFramebufferObject
 	Q_PROPERTY(QSizeF viewportSize READ getViewportSize WRITE setViewportSize)
 	QML_ELEMENT
 public:
-	Renderer* createRenderer() const;
+	Renderer* createRenderer() const override;
 
 	inline qint32 getFps() const { return fps; }
 	inline QSizeF getViewportSize() const { return QSizeF(width(), height()); }

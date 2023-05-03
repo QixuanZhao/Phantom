@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\camera\ObserverCamera.cpp" />
+    <ClCompile Include="src\configuration\Control.cpp" />
     <ClCompile Include="src\configuration\Data.cpp" />
     <ClCompile Include="src\configuration\Debug.cpp" />
     <ClCompile Include="src\configuration\Display.cpp" />
@@ -41,6 +42,7 @@
     <ClCompile Include="src\model\Surface.cpp" />
     <ClCompile Include="src\post-process\bloom\Bloom.cpp" />
     <QtMoc Include="src\model\ParallelLightModel.h" />
+    <ClInclude Include="src\configuration\Control.h" />
     <ClInclude Include="src\light\analytical\AttenuateLight.h" />
     <ClInclude Include="src\light\analytical\DirectionalLight.hpp" />
     <ClInclude Include="src\light\analytical\PointLight.hpp" />
@@ -65,11 +67,13 @@
     <ClCompile Include="src\qml\AmbientLightController.cpp" />
     <ClCompile Include="src\qml\AttenuateLightController.cpp" />
     <ClCompile Include="src\qml\AxesController.cpp" />
+    <ClCompile Include="src\qml\MouseCameraController.cpp" />
     <ClCompile Include="src\qml\Controller.cpp" />
     <ClCompile Include="src\qml\DataController.cpp" />
     <ClCompile Include="src\qml\DebugController.cpp" />
     <ClCompile Include="src\qml\DirectionalLightController.cpp" />
     <ClCompile Include="src\qml\DisplayController.cpp" />
+    <ClCompile Include="src\qml\FPSCameraController.cpp" />
     <ClCompile Include="src\qml\GraphicsController.cpp" />
     <ClCompile Include="src\qml\LightingController.cpp" />
     <ClCompile Include="src\qml\ObserverCameraController.cpp" />
@@ -82,6 +86,8 @@
     <ClCompile Include="src\qml\SpotlightController.cpp" />
     <ClCompile Include="src\utilities\CoordinateSystem.cpp" />
     <ClCompile Include="src\utilities\TextFile.cpp" />
+    <QtMoc Include="src\qml\FPSCameraController.h" />
+    <QtMoc Include="src\qml\MouseCameraController.h" />
     <ClInclude Include="src\utilities\TextureCopier.hpp">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -152,6 +158,7 @@
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="qml\AnalyticalLightTree.qml" />
+    <None Include="qml\CameraPanel.qml" />
     <None Include="qml\ColourPicker.qml" />
     <None Include="qml\CutoffGroupBox.qml" />
     <None Include="qml\DebugPanel.qml" />

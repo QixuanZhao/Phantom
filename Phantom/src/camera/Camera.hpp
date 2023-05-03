@@ -1,57 +1,9 @@
 ﻿#include "stdafx.h"
 #pragma once
 
-/**
- * @file    Camera.hpp
- * @brief   This file defines the Camera class. <br/>
- *          此文件定义 Camera 类。
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
 
-/**
- * @class Camera
- * @brief Camera class. <br/> 相机类
- * @details The camera class manages the computation of view and projection matrices <br/>
- *          相机类管理视角和投影矩阵的计算。
- * 
- *          To compute the view matrix, the following 3 ingredients are needed: 
- *           - camera position
- *           - camera front axis
- *           - camera up axis
- * 
- *          where front axis and up axis are determined by the attitude of the camera.
- *          Here camera attitude is defined by euler angles consisting of pitch, yaw, and roll.
- * 
- *          计算视角矩阵需要以下三个因素：
- *           - 相机位置
- *           - 相机前方坐标轴
- *           - 相机上方坐标轴
- * 
- *          其中前方坐标轴和上方坐标轴由相机姿态确定。
- *          此处的相机姿态定义为欧拉角，包括俯仰角、偏航角和侧滚角。
- * 
- *          To compute the projection matrix, the following 4 ingredients are needed:
- *           - field of view
- *           - aspect ratio
- *           - near plane
- *           - far plane
- * 
- *          where field of view (fov) is the angle of the vertical side face of the pyramid, 
- *          and where near plane and far plane cut the pyramid to a frustum.
- * 
- *          计算投影矩阵需要以下四个因素：
- *           - 视野
- *           - 横纵比
- *           - 近平面
- *           - 远平面
- * 
- *          其中，视野 (fov) 是视锥纵向侧面的角度，近平面和远平面把视域棱锥切成棱台。
- *          
- *          ![Perspective Frustum](perspective_frustum.png)
- * @author  赵启轩 <QixuanZhao@outlook.com>
- */
 class Camera
 {
 public:

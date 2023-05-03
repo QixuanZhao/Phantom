@@ -25,7 +25,7 @@ public:
 		pointLightController.setLight(nullptr);
 		directionalLightController.setLight(nullptr);
 		ambientLightController.setLight(&Lighting::lighting.ambientLight);
-		spotlightController.setLight(&Display::display.camera.getFlash());
+		spotlightController.setLight(&Display::display.observerCamera.getFlash());
 	}
 
 	inline AmbientLightController* getAmbientLightController() { return &ambientLightController; }
