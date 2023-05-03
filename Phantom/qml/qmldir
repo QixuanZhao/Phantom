@@ -1,0 +1,6 @@
+﻿module Phantom
+ColourPicker 1.0 ColourPicker.qml
+Knob 1.0 Knob.qml
+RealSpinBox 1.0 RealSpinBox.qml
+DisplayPanel 1.0 DisplayPanel.qml
+RadiantFluxGroupBox 1.0 RadiantFluxGroupBox.qml

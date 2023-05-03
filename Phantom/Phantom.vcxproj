@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\camera\ObserverCamera.cpp" />
+    <ClCompile Include="src\configuration\Data.cpp" />
+    <ClCompile Include="src\configuration\Debug.cpp" />
+    <ClCompile Include="src\configuration\Display.cpp" />
+    <ClCompile Include="src\configuration\GLConfiguration.cpp" />
+    <ClCompile Include="src\configuration\Lighting.cpp" />
+    <ClCompile Include="src\deferred\GBuffer.cpp" />
+    <ClCompile Include="src\light\analytical\AttenuateLight.cpp" />
+    <ClCompile Include="src\light\basic\ReflectiveLight.cpp" />
+    <ClCompile Include="src\light\ParallelLight.cpp" />
+    <ClCompile Include="src\light\basic\RadiometricLight.cpp" />
+    <ClCompile Include="src\light\ShadowCastingPointLight.cpp" />
+    <ClCompile Include="src\light\ShadowCastingSpotlight.cpp" />
+    <ClCompile Include="src\light\shadow\OmnidirectionalShadow.cpp" />
+    <ClCompile Include="src\light\shadow\OrthographicShadow.cpp" />
+    <ClCompile Include="src\light\shadow\PerspectiveShadow.cpp" />
+    <ClCompile Include="src\light\shadow\Shadow.cpp" />
+    <ClCompile Include="src\light\shadow\UnidirectionalShadow.cpp" />
+    <ClCompile Include="src\light\ssao\SSAO.cpp" />
+    <ClCompile Include="src\MainRenderer.cpp" />
+    <ClCompile Include="src\model\AABB.cpp" />
+    <ClCompile Include="src\model\AnalyticalLightTreeModel.cpp" />
+    <ClCompile Include="src\model\Object3D.cpp" />
+    <ClCompile Include="src\model\ParallelLightModel.cpp" />
+    <ClCompile Include="src\model\PointLightModel.cpp" />
+    <ClCompile Include="src\model\SpotlightModel.cpp" />
+    <ClCompile Include="src\model\Surface.cpp" />
+    <ClCompile Include="src\post-process\bloom\Bloom.cpp" />
+    <QtMoc Include="src\model\ParallelLightModel.h" />
+    <ClInclude Include="src\light\analytical\AttenuateLight.h" />
+    <ClInclude Include="src\light\analytical\DirectionalLight.hpp" />
+    <ClInclude Include="src\light\analytical\PointLight.hpp" />
+    <ClInclude Include="src\light\analytical\Spotlight.hpp" />
+    <ClInclude Include="src\light\basic\RadiometricLight.h" />
+    <ClInclude Include="src\light\basic\ReflectiveLight.h" />
+    <QtMoc Include="src\model\PointLightModel.h" />
+    <ClInclude Include="src\light\ShadowCastingSpotlight.h" />
+    <ClInclude Include="src\light\shadow\PerspectiveShadow.h" />
+    <QtMoc Include="src\model\SpotlightModel.h" />
+    <QtMoc Include="src\model\AnalyticalLightTreeModel.h" />
+    <ClInclude Include="src\post-process\blur\Blur.hpp">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\BoxBlur.h" />
+    <ClInclude Include="src\post-process\blur\BoxBlur.hpp" />
+    <ClInclude Include="src\post-process\blur\DualBlur.h" />
+    <ClInclude Include="src\post-process\blur\DualBlur.hpp" />
+    <ClInclude Include="src\post-process\blur\GaussianBlur.hpp">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClCompile Include="src\qml\AmbientLightController.cpp" />
+    <ClCompile Include="src\qml\AttenuateLightController.cpp" />
+    <ClCompile Include="src\qml\AxesController.cpp" />
+    <ClCompile Include="src\qml\Controller.cpp" />
+    <ClCompile Include="src\qml\DataController.cpp" />
+    <ClCompile Include="src\qml\DebugController.cpp" />
+    <ClCompile Include="src\qml\DirectionalLightController.cpp" />
+    <ClCompile Include="src\qml\DisplayController.cpp" />
+    <ClCompile Include="src\qml\GraphicsController.cpp" />
+    <ClCompile Include="src\qml\LightingController.cpp" />
+    <ClCompile Include="src\qml\ObserverCameraController.cpp" />
+    <ClCompile Include="src\qml\ParallelLightController.cpp" />
+    <ClCompile Include="src\qml\PointLightController.cpp" />
+    <ClCompile Include="src\qml\ReflectiveLightController.cpp" />
+    <ClCompile Include="src\qml\RenderingFramebufferObject.cpp" />
+    <ClCompile Include="src\qml\ShadowCastingPointLightController.cpp" />
+    <ClCompile Include="src\qml\ShadowController.cpp" />
+    <ClCompile Include="src\qml\SpotlightController.cpp" />
+    <ClCompile Include="src\utilities\CoordinateSystem.cpp" />
+    <ClCompile Include="src\utilities\TextFile.cpp" />
+    <ClInclude Include="src\utilities\TextureCopier.hpp">
+      <FileType>CppCode</FileType>
+    </ClInclude>
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\qml\RenderingFramebufferObject.h" />
+    <QtMoc Include="src\MainRenderer.h" />
+    <ClInclude Include="src\camera\Camera.hpp" />
+    <ClInclude Include="src\camera\FlashCamera.hpp" />
+    <ClInclude Include="src\camera\FPSCamera.hpp" />
+    <ClInclude Include="src\camera\MouseCamera.hpp" />
+    <ClInclude Include="src\camera\ObserverCamera.h" />
+    <ClInclude Include="src\configuration\Data.h" />
+    <QtMoc Include="src\configuration\Debug.h" />
+    <ClInclude Include="src\configuration\Display.h" />
+    <ClInclude Include="src\configuration\GLConfiguration.h" />
+    <ClInclude Include="src\configuration\Lighting.h" />
+    <ClInclude Include="src\deferred\GBuffer.h" />
+    <ClInclude Include="src\light\basic\AmbientLight.hpp" />
+    <ClInclude Include="src\light\basic\CompositeLight.hpp" />
+    <ClInclude Include="src\light\ParallelLight.h" />
+    <ClInclude Include="src\light\ShadowCastingPointLight.h" />
+    <ClInclude Include="src\light\shadow\OmnidirectionalShadow.h" />
+    <ClInclude Include="src\light\shadow\OrthographicShadow.h" />
+    <ClInclude Include="src\light\shadow\Shadow.h" />
+    <ClInclude Include="src\light\shadow\UnidirectionalShadow.h" />
+    <ClInclude Include="src\light\ssao\SSAO.h" />
+    <ClInclude Include="src\model\AABB.h" />
+    <ClInclude Include="src\model\Object3D.h" />
+    <ClInclude Include="src\model\Surface.h" />
+    <QtMoc Include="src\qml\Controller.h" />
+    <QtMoc Include="src\qml\ObserverCameraController.h" />
+    <QtMoc Include="src\qml\AxesController.h" />
+    <QtMoc Include="src\qml\DisplayController.h" />
+    <QtMoc Include="src\qml\LightingController.h" />
+    <QtMoc Include="src\qml\AmbientLightController.h" />
+    <QtMoc Include="src\qml\ParallelLightController.h" />
+    <QtMoc Include="src\qml\PointLightController.h" />
+    <QtMoc Include="src\qml\ReflectiveLightController.h" />
+    <QtMoc Include="src\qml\AttenuateLightController.h" />
+    <QtMoc Include="src\qml\DirectionalLightController.h" />
+    <QtMoc Include="src\qml\SpotlightController.h" />
+    <QtMoc Include="src\qml\ShadowCastingPointLightController.h" />
+    <QtMoc Include="src\qml\DataController.h" />
+    <QtMoc Include="src\qml\ShadowController.h" />
+    <QtMoc Include="src\qml\DebugController.h" />
+    <QtMoc Include="src\qml\GraphicsController.h" />
+    <ClInclude Include="src\post-process\bloom\Bloom.h" />
+    <ClInclude Include="src\post-process\blur\Blur.h" />
+    <ClInclude Include="src\post-process\blur\GaussianBlur.h" />
+    <ClInclude Include="src\post-process\blur\KawaseBlur.h" />
+    <ClInclude Include="src\post-process\blur\KawaseBlur.hpp" />
+    <ClInclude Include="src\utilities\Converter.hpp" />
+    <ClInclude Include="src\utilities\CoordinateSystem.h" />
+    <ClInclude Include="src\utilities\MathUtility.hpp" />
+    <ClInclude Include="src\utilities\ShaderProgram.hpp" />
+    <ClInclude Include="src\utilities\TextFile.h" />
+    <ClInclude Include="src\utilities\TextureCopier.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+    <None Include="qml\AnalyticalLightTree.qml" />
+    <None Include="qml\ColourPicker.qml" />
+    <None Include="qml\CutoffGroupBox.qml" />
+    <None Include="qml\DebugPanel.qml" />
+    <None Include="qml\DirectionGroupBox.qml" />
+    <None Include="qml\DisplayPanel.qml" />
+    <None Include="qml\GlobalController.qml" />
+    <None Include="qml\GraphicsPanel.qml" />
+    <None Include="qml\Knob.qml" />
+    <None Include="qml\LightingPanel.qml" />
+    <None Include="qml\ParallelLightList.qml" />
+    <None Include="qml\main.qml" />
+    <None Include="qml\ObjectDialog.qml" />
+    <None Include="qml\ObjectList.qml" />
+    <None Include="qml\PointLightList.qml" />
+    <None Include="qml\PositionGroupBox.qml" />
+    <None Include="qml\qmldir" />
+    <None Include="qml\RadiantFluxGroupBox.qml" />
+    <None Include="qml\RealSpinBox.qml" />
+    <None Include="qml\SpotlightList.qml" />
+    <None Include="qtquickcontrols2.conf" />
+    <None Include="res\shaders\axis.frag" />
+    <None Include="res\shaders\axis.vert" />
+    <None Include="res\shaders\bloom.frag" />
+    <None Include="res\shaders\bloom.vert" />
+    <None Include="res\shaders\blur.frag" />
+    <None Include="res\shaders\blur.vert" />
+    <None Include="res\shaders\depth.frag" />
+    <None Include="res\shaders\depth.vert" />
+    <None Include="res\shaders\hdr.frag" />
+    <None Include="res\shaders\hdr.vert" />
+    <None Include="res\shaders\light-source.frag" />
+    <None Include="res\shaders\light-source.vert" />
+    <None Include="res\shaders\omnidirectional-shadow.frag" />
+    <None Include="res\shaders\omnidirectional-shadow.geom" />
+    <None Include="res\shaders\omnidirectional-shadow.vert" />
+    <None Include="res\shaders\pure-colour.frag" />
+    <None Include="res\shaders\pure-colour.vert" />
+    <None Include="res\shaders\texture.frag" />
+    <None Include="res\shaders\texture.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\objects\sphere.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="Translation_zh_CN.ts" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3C5C6E51-0EC5-4741-81D1-1D85D888BC0A}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22000.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+    <ProjectName>Phantom</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>6.5.0_msvc2019_64</QtInstall>
+    <QtModules>core;gui;qml;quick;quickcontrols2;widgets;opengl</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+    <QtQMLDebugEnable>false</QtQMLDebugEnable>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>6.4.2_msvc2019_64</QtInstall>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>include;.;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

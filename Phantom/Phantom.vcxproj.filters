@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{0c442317-2404-419c-90cd-3f52aaaca1c9}</UniqueIdentifier>
+      <Extensions>qrc</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{3013b43e-b685-4d63-b4a4-df00bbdf0c3e}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="QML">
+      <UniqueIdentifier>{bd6b1dbd-8af7-4c99-9c41-292f8e449a59}</UniqueIdentifier>
+      <Extensions>qml</Extensions>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{d7add54b-79ec-4e95-bc99-00aec9362dd3}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="Form">
+      <UniqueIdentifier>{b6445f00-119a-4a0f-98b8-58d0f1267302}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Header\Utility">
+      <UniqueIdentifier>{cab2c5cc-bf44-4b2a-afe3-47739b227cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{835d48e9-af8b-419f-a5b9-79da56f3db52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Model">
+      <UniqueIdentifier>{9b8080ec-8fdd-4991-af90-13ee1c7075bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Model">
+      <UniqueIdentifier>{c653f676-e300-41ca-ad64-23e0ad916954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light">
+      <UniqueIdentifier>{70391193-c579-4da7-a34f-c43a07520462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light">
+      <UniqueIdentifier>{d23aee77-0da2-4d79-9ec9-0a8fa52ec049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light\Basic">
+      <UniqueIdentifier>{7113f071-3f08-44cc-bb5e-aa8371236477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light\Basic">
+      <UniqueIdentifier>{c7a0a9a4-ef24-438c-b3f3-dc1e9e7b719f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light\Shadow">
+      <UniqueIdentifier>{da0519e2-25a8-4058-912d-c5dfaba7ef49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light\Shadow">
+      <UniqueIdentifier>{e8823c0c-d91f-45f6-92b5-1fe4b85ee78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Configuration">
+      <UniqueIdentifier>{08112be0-cffc-46ab-b30b-1d81af6624ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Configuration">
+      <UniqueIdentifier>{34abe5a9-77f8-48f8-9d38-6d4e6fe3c51c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Camera">
+      <UniqueIdentifier>{27a69e6e-1d46-4cb2-8b38-7288c92cf8eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Object">
+      <UniqueIdentifier>{6f8c39fb-b1ce-4ed5-9bb6-150fe1e6eefd}</UniqueIdentifier>
+      <Extensions>obj;step;stp</Extensions>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{345a98b6-d200-402b-b6d2-90f7f55acf6a}</UniqueIdentifier>
+      <Extensions>vert;frag;geom</Extensions>
+    </Filter>
+    <Filter Include="QML\Headers">
+      <UniqueIdentifier>{79fec680-ec36-45b3-8214-bdc230beeeae}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="QML\Headers\Lighting">
+      <UniqueIdentifier>{ef1491c9-b8a0-4e0f-ba52-5bc20c79e01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\Headers\Lighting\Basic">
+      <UniqueIdentifier>{74166813-400e-4967-93d3-c63d8e908152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\Source">
+      <UniqueIdentifier>{1befa0e6-8392-44ed-af96-cf1260aa2102}</UniqueIdentifier>
+      <Extensions>cpp</Extensions>
+    </Filter>
+    <Filter Include="QML\Source\Lighting">
+      <UniqueIdentifier>{ca764e97-3aa5-4fb0-942b-c9da023dbca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QML\Source\Lighting\Basic">
+      <UniqueIdentifier>{cbc0ac37-b1c1-4c47-9045-cd992abae385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Deferred">
+      <UniqueIdentifier>{27997d41-51d3-455b-9303-0051c9f01df7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Deferred">
+      <UniqueIdentifier>{c6882fea-a8f5-49b9-baaf-e4f65862ae3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light\SSAO">
+      <UniqueIdentifier>{a87f433b-a3b4-4a68-add1-440ac865cc4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light\SSAO">
+      <UniqueIdentifier>{65c49b34-316d-4019-a114-4b7fd92a6c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\PostProcess">
+      <UniqueIdentifier>{7ec0a7f5-8a16-4a53-b5c9-eb8dd3d12dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\PostProcess">
+      <UniqueIdentifier>{60261ee8-5780-4729-9725-91d033c35d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\PostProcess\Bloom">
+      <UniqueIdentifier>{986b3578-f42e-43db-af19-eb0985133875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\PostProcess\Blur">
+      <UniqueIdentifier>{c4b5763d-20bf-4f43-a901-1979b1ecf386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\PostProcess\Blur">
+      <UniqueIdentifier>{b786a267-e27a-42e2-a0eb-7b5346d44d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\PostProcess\Bloom">
+      <UniqueIdentifier>{3e783a34-aacf-4a9c-985e-d8b03f26808f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Light\Analytical">
+      <UniqueIdentifier>{d2935e89-70c3-492f-ab79-73e60a4b4ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Light\Analytical">
+      <UniqueIdentifier>{71ff6250-dbea-44c7-afe2-3de64e22038a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Camera">
+      <UniqueIdentifier>{35e36671-60be-4da0-a839-3fde93b2fa75}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="Resource.qrc">
+      <Filter>Resource</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\MainRenderer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="src\utilities\CoordinateSystem.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utilities\TextFile.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\AABB.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\Object3D.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\Surface.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\shadow\OmnidirectionalShadow.cpp">
+      <Filter>Source\Light\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\shadow\OrthographicShadow.cpp">
+      <Filter>Source\Light\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\shadow\Shadow.cpp">
+      <Filter>Source\Light\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\shadow\UnidirectionalShadow.cpp">
+      <Filter>Source\Light\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\Data.cpp">
+      <Filter>Source\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\Debug.cpp">
+      <Filter>Source\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\Display.cpp">
+      <Filter>Source\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\GLConfiguration.cpp">
+      <Filter>Source\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\configuration\Lighting.cpp">
+      <Filter>Source\Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="src\camera\ObserverCamera.cpp">
+      <Filter>Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\Controller.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\RenderingFramebufferObject.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\LightingController.cpp">
+      <Filter>QML\Source\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ParallelLightController.cpp">
+      <Filter>QML\Source\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\AmbientLightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\AttenuateLightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ReflectiveLightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\DirectionalLightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\PointLightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ShadowCastingPointLightController.cpp">
+      <Filter>QML\Source\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\SpotlightController.cpp">
+      <Filter>QML\Source\Lighting\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ShadowController.cpp">
+      <Filter>QML\Source\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\deferred\GBuffer.cpp">
+      <Filter>Source\Deferred</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\DisplayController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\DebugController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\DataController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\ObserverCameraController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\AxesController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\qml\GraphicsController.cpp">
+      <Filter>QML\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\ssao\SSAO.cpp">
+      <Filter>Source\Light\SSAO</Filter>
+    </ClCompile>
+    <ClCompile Include="src\post-process\bloom\Bloom.cpp">
+      <Filter>Source\PostProcess\Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\ParallelLightModel.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\analytical\AttenuateLight.cpp">
+      <Filter>Source\Light\Analytical</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\basic\RadiometricLight.cpp">
+      <Filter>Source\Light\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\basic\ReflectiveLight.cpp">
+      <Filter>Source\Light\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\ParallelLight.cpp">
+      <Filter>Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\ShadowCastingPointLight.cpp">
+      <Filter>Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\ShadowCastingSpotlight.cpp">
+      <Filter>Source\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\light\shadow\PerspectiveShadow.cpp">
+      <Filter>Source\Light\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\SpotlightModel.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\PointLightModel.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\model\AnalyticalLightTreeModel.cpp">
+      <Filter>Source\Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="src\MainRenderer.h">
+      <Filter>Header</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\LightingController.h">
+      <Filter>QML\Headers\Lighting</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ParallelLightController.h">
+      <Filter>QML\Headers\Lighting</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ReflectiveLightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\AttenuateLightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\AmbientLightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\Controller.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\RenderingFramebufferObject.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\DirectionalLightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\PointLightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\SpotlightController.h">
+      <Filter>QML\Headers\Lighting\Basic</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ShadowCastingPointLightController.h">
+      <Filter>QML\Headers\Lighting</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ShadowController.h">
+      <Filter>QML\Headers\Lighting</Filter>
+    </QtMoc>
+    <QtMoc Include="src\configuration\Debug.h">
+      <Filter>Header\Configuration</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\AxesController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\ObserverCameraController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\DataController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\DebugController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\DisplayController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\qml\GraphicsController.h">
+      <Filter>QML\Headers</Filter>
+    </QtMoc>
+    <QtMoc Include="src\model\ParallelLightModel.h">
+      <Filter>Header\Model</Filter>
+    </QtMoc>
+    <QtMoc Include="src\model\PointLightModel.h">
+      <Filter>Header\Model</Filter>
+    </QtMoc>
+    <QtMoc Include="src\model\SpotlightModel.h">
+      <Filter>Header\Model</Filter>
+    </QtMoc>
+    <QtMoc Include="src\model\AnalyticalLightTreeModel.h">
+      <Filter>Header\Model</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qml\main.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="res\shaders\axis.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\axis.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\bloom.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\bloom.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\blur.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\blur.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\depth.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\depth.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\hdr.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\hdr.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\light-source.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\light-source.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\omnidirectional-shadow.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\omnidirectional-shadow.geom">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\omnidirectional-shadow.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\pure-colour.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\pure-colour.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\texture.frag">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="res\shaders\texture.vert">
+      <Filter>Resource\Shader</Filter>
+    </None>
+    <None Include="cpp.hint" />
+    <None Include="qml\ColourPicker.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\qmldir">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\Knob.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\RealSpinBox.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qtquickcontrols2.conf" />
+    <None Include="qml\DisplayPanel.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\LightingPanel.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\ObjectList.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\ParallelLightList.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\GlobalController.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\GraphicsPanel.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\DebugPanel.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\ObjectDialog.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\RadiantFluxGroupBox.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\DirectionGroupBox.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\PointLightList.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\PositionGroupBox.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\SpotlightList.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\CutoffGroupBox.qml">
+      <Filter>QML</Filter>
+    </None>
+    <None Include="qml\AnalyticalLightTree.qml">
+      <Filter>QML</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="src\utilities\Converter.hpp">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\CoordinateSystem.h">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\MathUtility.hpp">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\ShaderProgram.hpp">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\TextFile.h">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\AABB.h">
+      <Filter>Header\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\Object3D.h">
+      <Filter>Header\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\model\Surface.h">
+      <Filter>Header\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\ParallelLight.h">
+      <Filter>Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\ShadowCastingPointLight.h">
+      <Filter>Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\basic\AmbientLight.hpp">
+      <Filter>Header\Light\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\basic\CompositeLight.hpp">
+      <Filter>Header\Light\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\shadow\OmnidirectionalShadow.h">
+      <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\shadow\OrthographicShadow.h">
+      <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\shadow\Shadow.h">
+      <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\shadow\UnidirectionalShadow.h">
+      <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\configuration\Display.h">
+      <Filter>Header\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\configuration\GLConfiguration.h">
+      <Filter>Header\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\configuration\Lighting.h">
+      <Filter>Header\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera\FlashCamera.hpp">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera\FPSCamera.hpp">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera\MouseCamera.hpp">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera\Camera.hpp">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\camera\ObserverCamera.h">
+      <Filter>Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\configuration\Data.h">
+      <Filter>Header\Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="src\deferred\GBuffer.h">
+      <Filter>Header\Deferred</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\ssao\SSAO.h">
+      <Filter>Header\Light\SSAO</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\bloom\Bloom.h">
+      <Filter>Header\PostProcess\Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\Blur.h">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\GaussianBlur.h">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\GaussianBlur.hpp">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\Blur.hpp">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\BoxBlur.h">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\BoxBlur.hpp">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\KawaseBlur.h">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\KawaseBlur.hpp">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\TextureCopier.h">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utilities\TextureCopier.hpp">
+      <Filter>Header\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\DualBlur.h">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\post-process\blur\DualBlur.hpp">
+      <Filter>Header\PostProcess\Blur</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\analytical\AttenuateLight.h">
+      <Filter>Header\Light\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\analytical\DirectionalLight.hpp">
+      <Filter>Header\Light\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\analytical\PointLight.hpp">
+      <Filter>Header\Light\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\analytical\Spotlight.hpp">
+      <Filter>Header\Light\Analytical</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\basic\RadiometricLight.h">
+      <Filter>Header\Light\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\basic\ReflectiveLight.h">
+      <Filter>Header\Light\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\ShadowCastingSpotlight.h">
+      <Filter>Header\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\light\shadow\PerspectiveShadow.h">
+      <Filter>Header\Light\Shadow</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\objects\sphere.obj">
+      <Filter>Resource\Object</Filter>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="Translation_zh_CN.ts" />
+  </ItemGroup>
+</Project>
