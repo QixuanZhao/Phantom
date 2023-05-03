@@ -38,12 +38,10 @@ GroupBox {
             second.value: Math.PI / 10
 
             first.onMoved: {
-                console.log('first', first.value)
                 groupBox.innerCutoff = first.value
             }
 
             second.onMoved: {
-                console.log('second', second.value)
                 groupBox.outerCutoff = second.value
             }
 

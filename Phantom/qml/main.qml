@@ -330,33 +330,32 @@ ApplicationWindow {
                 spacing: 0
 
                 Label {
-                    color: "white"
-                    wrapMode: Text.WordWrap
                     text: qsTr("FPS: %1").arg(renderer.fps)
                 }
 
                 Label {
-                    color: "white"
-                    wrapMode: Text.WordWrap
                     text: qsTr("Cursor: (%1, %2)").arg(rendererMouse.mouseX).arg(rendererMouse.mouseY)
                 }
 
                 Label {
-                    color: "white"
-                    wrapMode: Text.WordWrap
                     text: qsTr("Attitude: (%1°, %2°, %3°)").arg(controller.camera.pitch).arg(controller.camera.yaw).arg(controller.camera.roll)
                 }
 
                 Label {
-                    color: "white"
-                    wrapMode: Text.WordWrap
                     text: qsTr("Distance: %1").arg(controller.observerCamera.distance)
                 }
 
                 Label {
-                    color: "white"
-                    wrapMode: Text.WordWrap
                     text: qsTr("Target: (%1, %2, %3)").arg(controller.observerCamera.target.x).arg(controller.observerCamera.target.y).arg(controller.observerCamera.target.z)
+                }
+
+                Label {
+                    text: qsTr("Mouse %1 (%2)").arg(rendererMouse.catchMouse ? qsTr("Trapped") : qsTr("Free")).arg(
+                              rendererMouse.observerMode ? qsTr("Change to FPS camera to enable") : (
+                                                               rendererMouse.activeFocus ? qsTr("press CTRL to toggle") : qsTr("unfocused")
+                                                               )
+                              )
+
                 }
             }
 
