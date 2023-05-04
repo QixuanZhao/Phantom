@@ -169,7 +169,7 @@ bool ParallelLightModel::insertRows(int row, int count, const QModelIndex& paren
 	beginInsertRows(parent, row, row + count - 1);
 	ParallelLight light;
 	light.setName("Light");
-	light.setRadiometric(GLConfiguration::configuration.pbrEnabled);
+	light.setRadiometric(true);
 	light.setDiffuse(vec3(1.0f));
 	light.setSpecular(vec3(1.0f));
 	light.setColour(vec3(1.0f));

@@ -41,6 +41,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<Controller>("Phantom", 1, 0, "Controller");
 
     QQmlApplicationEngine engine;
+    QStringList pathList = engine.importPathList();
+    for (QString path : pathList) {
+        Debug::getInstance().log(path);
+    }
     engine.addImportPath(":/qml/");
     engine.load(":/qml/main.qml");
 

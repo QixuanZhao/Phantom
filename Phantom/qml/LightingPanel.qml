@@ -12,7 +12,6 @@ Item {
     implicitHeight: childrenRect.height + 30
 
     Component.onCompleted: {
-        controller.lighting.blinnPhong = Qt.binding(() => blinnPhongSwitch.checked)
         controller.lighting.bilateralReflective = Qt.binding(() => bilaterallyReflectiveSwitch.checked)
         controller.lighting.bloom = Qt.binding(() => bloomSwitch.checked)
         controller.lighting.ambientLight.colour = Qt.binding(() => ambientLightColourPicker.currentColour)
@@ -52,13 +51,6 @@ Item {
         ColumnLayout {
             spacing: 6
             anchors.horizontalCenter: parent.horizontalCenter
-
-            Switch {
-                id: blinnPhongSwitch
-                enabled: !controller.graphics.pbrEnabled
-                checked: true
-                text: "Blinn-Phong %1".arg(checked ? qsTr("Enabled") : qsTr("Disabled"))
-            }
 
             Switch {
                 id: bilaterallyReflectiveSwitch
@@ -233,14 +225,13 @@ Item {
                         id: ssaoSwitch
                         text: qsTr("Ambient Occlusion")
                         checked: true
-                        enabled: controller.graphics.deferredRendering
                     }
 
                     GridLayout {
                         width: parent.width
                         rowSpacing: 0
 
-                        enabled: ssaoSwitch.checked && controller.graphics.deferredRendering
+                        enabled: ssaoSwitch.checked
                         columns: 3
                         Label { text: qsTr("Filter Size") }
                         Slider {

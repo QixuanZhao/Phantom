@@ -75,11 +75,11 @@ int AnalyticalLightTreeModel::rowCount(const QModelIndex& parent) const
 	if (!parent.isValid()) return 3;
 
 	const char* type = static_cast<const char*>(parent.internalPointer());
-	if (type && type[0] != INDICATOR) return 0;
-	
 	if (type == PARALLEL_LIGHT) return parallelLightModel->count();
 	if (type == POINT_LIGHT) return pointLightModel->count();
-	if (type == SPOTLIGHT) return spotlightModel->count();
+	if (type == SPOTLIGHT) return spotlightModel->count(); 
+
+	return 0;
 }
 
 int AnalyticalLightTreeModel::columnCount(const QModelIndex& parent) const

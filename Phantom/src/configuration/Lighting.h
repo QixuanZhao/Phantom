@@ -21,7 +21,6 @@ public:
 	int pickedSpotlightIndex = -1;
 
 	bool bilateralReflective = true;
-	bool blinnPhong = false;
 	bool bloom = true;
 
 	bool ssaoEnabled = true;

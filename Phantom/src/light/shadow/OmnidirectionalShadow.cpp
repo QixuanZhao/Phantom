@@ -102,31 +102,13 @@ void OmnidirectionalShadow::updateShadow(ShaderProgram* sp)
 
     glLineWidth(1.0f);
 
-    if (GLConfiguration::configuration.deferredRendering) {
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, GLConfiguration::configuration.gBuffer->positionTexture());
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, GLConfiguration::configuration.gBuffer->depthTexture());
-        sp->set("input_position", 1);
-        sp->set("input_depth", 2);
-        Display::screenQuad->draw(*sp);
-    }
-    else {
-        sp->set("view", Display::display.observerCamera.getView());
-        sp->set("projection", Display::display.observerCamera.getProjection());
-        glDisable(GL_CULL_FACE);
-        for (Object3D* object : Data::getInstance().getObjects())
-            object->draw(*sp);
-
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
-        float zoomDistance = Data::getInstance().getZoomDistance();
-        if (zoomDistance < 1e-6f) zoomDistance = Display::display.observerCamera.FAR_PLANE_DISTANCE;
-        Display::horizon->setScale(vec3(zoomDistance));
-        Display::horizon->draw(*sp);
-        glDisable(GL_CULL_FACE);
-    }
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, GLConfiguration::configuration.gBuffer->positionTexture());
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, GLConfiguration::configuration.gBuffer->depthTexture());
+    sp->set("input_position", 1);
+    sp->set("input_depth", 2);
+    Display::screenQuad->draw(*sp);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

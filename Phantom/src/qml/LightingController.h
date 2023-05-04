@@ -7,7 +7,6 @@ class LightingController : public QQuickItem
 	Q_PROPERTY(DirectionalLightController* parallelLight READ getDirectionalLightController)
 	Q_PROPERTY(PointLightController* pointLight READ getPointLightController)
 	Q_PROPERTY(SpotlightController* spotlight READ getSpotlightController)
-	Q_PROPERTY(bool blinnPhong READ blinnPhongEnabled WRITE setBlinnPhongEnabled)
 	Q_PROPERTY(bool bilateralReflective READ bilateralReflective WRITE setBilateralReflective)
 	Q_PROPERTY(bool bloom READ bloomEnabled WRITE setBloomEnabled)
 	Q_PROPERTY(qint8 pickedPointLightIndex READ pickedPointLightIndex WRITE setPickedPointLightIndex 
@@ -33,8 +32,6 @@ public:
 	inline PointLightController* getPointLightController() { return &pointLightController; }
 	inline SpotlightController* getSpotlightController() { return &spotlightController; }
 
-	inline bool blinnPhongEnabled() const { return Lighting::lighting.blinnPhong; }
-	inline void setBlinnPhongEnabled(const bool& enabled) { Lighting::lighting.blinnPhong = enabled; }
 	inline bool bilateralReflective() const { return Lighting::lighting.bilateralReflective; }
 	inline void setBilateralReflective(const bool& reflective) { Lighting::lighting.bilateralReflective = reflective; }
 	inline bool bloomEnabled() const { return Lighting::lighting.bloom; }

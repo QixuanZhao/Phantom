@@ -2,16 +2,6 @@
 
 GLConfiguration GLConfiguration::configuration;
 
-void GLConfiguration::loadShaderProgram()
-{
-    if (sp) delete sp;
-
-    sp = new ShaderProgram(
-        TextFile("res/shaders/pure-colour.vert").getContent(),
-        TextFile("res/shaders/pure-colour.frag").getContent()
-    );
-}
-
 void GLConfiguration::loadOrthographicalShadowShaderProgram()
 {
     if (orthographicShadowSp) delete orthographicShadowSp;
@@ -19,16 +9,6 @@ void GLConfiguration::loadOrthographicalShadowShaderProgram()
     orthographicShadowSp = new ShaderProgram(
         TextFile("res/shaders/orthographic-shadow.vert").getContent(),
         TextFile("res/shaders/orthographic-shadow.frag").getContent()
-    );
-}
-
-void GLConfiguration::loadOrthographicalShadowInterpreterShaderProgram()
-{
-    if (orthographicShadowInterpreterSp) delete orthographicShadowInterpreterSp;
-
-    orthographicShadowInterpreterSp = new ShaderProgram(
-        TextFile("res/shaders/orthographic-shadow-interpreter.vert").getContent(),
-        TextFile("res/shaders/orthographic-shadow-interpreter.frag").getContent()
     );
 }
 
@@ -40,16 +20,6 @@ void GLConfiguration::loadOmnidirectionalShadowShaderProgram()
         TextFile("res/shaders/omnidirectional-shadow.vert").getContent(),
         TextFile("res/shaders/omnidirectional-shadow.geom").getContent(),
         TextFile("res/shaders/omnidirectional-shadow.frag").getContent()
-    );
-}
-
-void GLConfiguration::loadOmnidirectionalShadowInterpreterShaderProgram()
-{
-    if (omnidirectionalShadowInterpreterSp) delete omnidirectionalShadowInterpreterSp;
-
-    omnidirectionalShadowInterpreterSp = new ShaderProgram(
-        TextFile("res/shaders/omnidirectional-shadow-interpreter.vert").getContent(),
-        TextFile("res/shaders/omnidirectional-shadow-interpreter.frag").getContent()
     );
 }
 
@@ -293,16 +263,6 @@ void GLConfiguration::loadOmnidirectionalShadowInterpreterDeferredShaderProgram(
     omnidirectionalShadowInterpreterDeferredSp = new ShaderProgram(
         TextFile("res/shaders/omnidirectional-shadow-interpreter-deferred.vert").getContent(),
         TextFile("res/shaders/omnidirectional-shadow-interpreter-deferred.frag").getContent()
-    );
-}
-
-void GLConfiguration::loadLightingDeferredShaderProgram()
-{
-    if (lightingDeferredSp) delete lightingDeferredSp;
-
-    lightingDeferredSp = new ShaderProgram(
-        TextFile("res/shaders/lighting-deferred.vert").getContent(),
-        TextFile("res/shaders/lighting-deferred.frag").getContent()
     );
 }
 

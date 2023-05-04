@@ -31,11 +31,8 @@ protected:
     GLuint blurTexture;
     GLint blurTextureImageUnit;
 
-    ShaderProgram*& sp;
     ShaderProgram*& orthographicShadowSp;
-    ShaderProgram*& orthographicShadowInterpreterSp;
     ShaderProgram*& omnidirectionalShadowSp;
-    ShaderProgram*& omnidirectionalShadowInterpreterSp;
     ShaderProgram*& lightSourceSp;
     ShaderProgram*& axisSp;
     ShaderProgram*& hdrSp;
@@ -44,7 +41,6 @@ protected:
     ShaderProgram*& textureCubeSp;
     ShaderProgram*& textureCubeArraySp;
 
-    ShaderProgram*& lightingDeferredSp;
     ShaderProgram*& orthographicShadowInterpreterDeferredSp;
     ShaderProgram*& omnidirectionalShadowInterpreterDeferredSp;
     ShaderProgram*& ssaoSp;

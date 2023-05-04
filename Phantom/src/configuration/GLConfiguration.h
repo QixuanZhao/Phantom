@@ -57,11 +57,8 @@ public:
 		Dual = 3
 	};
 
-	ShaderProgram* sp = nullptr;
 	ShaderProgram* orthographicShadowSp = nullptr;
-	ShaderProgram* orthographicShadowInterpreterSp = nullptr;
 	ShaderProgram* omnidirectionalShadowSp = nullptr;
-	ShaderProgram* omnidirectionalShadowInterpreterSp = nullptr;
 	ShaderProgram* lightSourceSp = nullptr;
 	ShaderProgram* axisSp = nullptr;
 
@@ -100,13 +97,10 @@ public:
 	ShaderProgram* gpSp = nullptr;
 	ShaderProgram* orthographicShadowInterpreterDeferredSp = nullptr;
 	ShaderProgram* omnidirectionalShadowInterpreterDeferredSp = nullptr;
-	ShaderProgram* lightingDeferredSp = nullptr;
 	ShaderProgram* ssaoSp = nullptr;
 
 	ShaderProgram* pbrSp = nullptr;
 
-	bool deferredRendering = false;
-	bool pbrEnabled = false;
 	GBuffer* gBuffer = nullptr;
 	SSAO* ssao = nullptr;
 
@@ -127,11 +121,8 @@ public:
 
 	int textureCount = 0;
 
-	void loadShaderProgram();
 	void loadOrthographicalShadowShaderProgram();
-	void loadOrthographicalShadowInterpreterShaderProgram();
 	void loadOmnidirectionalShadowShaderProgram();
-	void loadOmnidirectionalShadowInterpreterShaderProgram();
 	void loadLightSourceShaderProgram();
 	void loadAxisShaderProgram();
 
@@ -149,7 +140,6 @@ public:
 	void loadGeometryPassShaderProgram();
 	void loadOrthographicShadowInterpreterDeferredShaderProgram();
 	void loadOmnidirectionalShadowInterpreterDeferredShaderProgram();
-	void loadLightingDeferredShaderProgram();
 	void loadSSAOShaderProgram();
 
 	void loadPBRShaderProgram();
@@ -160,11 +150,8 @@ public:
 	void initializeBloom();
 
 	inline void loadShaderPrograms() {
-		loadShaderProgram();
 		loadOrthographicalShadowShaderProgram(); 
-		loadOrthographicalShadowInterpreterShaderProgram();
 		loadOmnidirectionalShadowShaderProgram();
-		loadOmnidirectionalShadowInterpreterShaderProgram();
 		loadLightSourceShaderProgram();
 		loadAxisShaderProgram();
 		loadBlurShaderProgram();
@@ -179,7 +166,6 @@ public:
 		loadGeometryPassShaderProgram();
 		loadOrthographicShadowInterpreterDeferredShaderProgram();
 		loadOmnidirectionalShadowInterpreterDeferredShaderProgram();
-		loadLightingDeferredShaderProgram();
 		loadSSAOShaderProgram();
 
 		loadPBRShaderProgram();

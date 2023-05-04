@@ -169,7 +169,7 @@ bool PointLightModel::insertRows(int row, int count, const QModelIndex& parent)
 	beginInsertRows(parent, row, row + count - 1);
 	ShadowCastingPointLight light;
 	light.setName("Light");
-	light.setRadiometric(GLConfiguration::configuration.pbrEnabled);
+	light.setRadiometric(true);
 	light.setDiffuse(vec3(1.0f));
 	light.setSpecular(vec3(1.0f));
 	light.setColour(vec3(1.0f));

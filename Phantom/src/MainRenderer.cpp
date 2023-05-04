@@ -1,11 +1,8 @@
 #include "stdafx.h"
 
 MainRenderer::MainRenderer():
-    sp(GLConfiguration::configuration.sp),
     orthographicShadowSp(GLConfiguration::configuration.orthographicShadowSp),
-    orthographicShadowInterpreterSp(GLConfiguration::configuration.orthographicShadowInterpreterSp),
     omnidirectionalShadowSp(GLConfiguration::configuration.omnidirectionalShadowSp),
-    omnidirectionalShadowInterpreterSp(GLConfiguration::configuration.omnidirectionalShadowInterpreterSp),
     lightSourceSp(GLConfiguration::configuration.lightSourceSp),
     axisSp(GLConfiguration::configuration.axisSp),
     hdrSp(GLConfiguration::configuration.hdrSp),
@@ -14,7 +11,6 @@ MainRenderer::MainRenderer():
     textureCubeSp(GLConfiguration::configuration.textureCubeSp),
     textureCubeArraySp(GLConfiguration::configuration.textureCubeArraySp),
 
-    lightingDeferredSp(GLConfiguration::configuration.lightingDeferredSp),
     orthographicShadowInterpreterDeferredSp(GLConfiguration::configuration.orthographicShadowInterpreterDeferredSp),
     omnidirectionalShadowInterpreterDeferredSp(GLConfiguration::configuration.omnidirectionalShadowInterpreterDeferredSp),
     ssaoSp(GLConfiguration::configuration.ssaoSp),
@@ -223,13 +219,11 @@ void MainRenderer::render()
     glEnable(GL_PROGRAM_POINT_SIZE);
 
     /// geometry pass
-    if (GLConfiguration::configuration.deferredRendering) {
-        gBuffer->render();
+    gBuffer->render();
 
-        if (Lighting::lighting.ssaoEnabled) {
-            ssao->render();
-            ssao->blur();
-        }
+    if (Lighting::lighting.ssaoEnabled) {
+        ssao->render();
+        ssao->blur();
     }
 
     /// shadow mapping
@@ -239,9 +233,7 @@ void MainRenderer::render()
             Shadow& shadow = pl.getShadow();
             if (!shadow.isUpdated())
                 shadow.updateDepth(orthographicShadowSp);
-            if (GLConfiguration::configuration.deferredRendering)
-                shadow.updateShadow(orthographicShadowInterpreterDeferredSp);
-            else shadow.updateShadow(orthographicShadowInterpreterSp);
+            shadow.updateShadow(orthographicShadowInterpreterDeferredSp);
 
             shadow.blurShadow(Lighting::lighting.shadowSettings.blurPassCount);
         }
@@ -250,9 +242,7 @@ void MainRenderer::render()
             Shadow& shadow = sl.getShadow();
             if (!shadow.isUpdated())
                 shadow.updateDepth(omnidirectionalShadowSp);
-            if (GLConfiguration::configuration.deferredRendering)
-                shadow.updateShadow(omnidirectionalShadowInterpreterDeferredSp);
-            else shadow.updateShadow(omnidirectionalShadowInterpreterSp);
+            shadow.updateShadow(omnidirectionalShadowInterpreterDeferredSp);
 
             shadow.blurShadow(Lighting::lighting.shadowSettings.blurPassCount);
         }
@@ -261,9 +251,7 @@ void MainRenderer::render()
             Shadow& shadow = ss.getShadow();
             if (!shadow.isUpdated())
                 shadow.updateDepth(orthographicShadowSp);
-            if (GLConfiguration::configuration.deferredRendering)
-                shadow.updateShadow(orthographicShadowInterpreterDeferredSp);
-            else shadow.updateShadow(orthographicShadowInterpreterSp);
+            shadow.updateShadow(orthographicShadowInterpreterDeferredSp);
 
             shadow.blurShadow(Lighting::lighting.shadowSettings.blurPassCount);
         }
@@ -287,154 +275,97 @@ void MainRenderer::render()
     //glActiveTexture(GL_TEXTURE1);
     //glBindTexture(GL_TEXTURE_2D, Lighting::lighting.pointLight.getShadow().getShadowTexture());
 
-    if (GLConfiguration::configuration.deferredRendering) {
-        lightingDeferredSp->set("blinnPhong", Lighting::lighting.blinnPhong);
-        pbrSp->set("input_metallic_roughness", 6);
-        pbrSp->set("input_distinction_coefficient", 8);
+    pbrSp->set("input_metallic_roughness", 6);
+    pbrSp->set("input_distinction_coefficient", 8);
 
-        ShaderProgram* currentSp = GLConfiguration::configuration.pbrEnabled ? pbrSp : lightingDeferredSp;
+    ShaderProgram* currentSp = pbrSp;
 
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->positionTexture());
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->positionTexture());
 
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->normalTexture());
+    glActiveTexture(GL_TEXTURE3);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->normalTexture());
 
-        glActiveTexture(GL_TEXTURE4);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->albedoTexture());
+    glActiveTexture(GL_TEXTURE4);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->albedoTexture());
 
-        glActiveTexture(GL_TEXTURE5);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->depthTexture());
+    glActiveTexture(GL_TEXTURE5);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->depthTexture());
 
-        glActiveTexture(GL_TEXTURE6);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->metallicRoughnessTexture());
+    glActiveTexture(GL_TEXTURE6);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->metallicRoughnessTexture());
 
-        glActiveTexture(GL_TEXTURE7);
-        glBindTexture(GL_TEXTURE_2D, ssao->getTexture());
+    glActiveTexture(GL_TEXTURE7);
+    glBindTexture(GL_TEXTURE_2D, ssao->getTexture());
 
-        glActiveTexture(GL_TEXTURE8);
-        glBindTexture(GL_TEXTURE_2D, gBuffer->distinctionCoefficientTexture());
+    glActiveTexture(GL_TEXTURE8);
+    glBindTexture(GL_TEXTURE_2D, gBuffer->distinctionCoefficientTexture());
 
-        currentSp->set("parallelLightShadowMap", 0);
-        currentSp->set("pointLightShadowMap", 1);
+    currentSp->set("parallelLightShadowMap", 0);
+    currentSp->set("pointLightShadowMap", 1);
 
-        currentSp->set("input_position", 2);
-        currentSp->set("input_normal", 3);
-        currentSp->set("input_albedo", 4);
-        currentSp->set("input_depth", 5);
+    currentSp->set("input_position", 2);
+    currentSp->set("input_normal", 3);
+    currentSp->set("input_albedo", 4);
+    currentSp->set("input_depth", 5);
 
-        currentSp->set("ambientOcclusionMap", 7);
-        currentSp->set("ssaoEnabled", Lighting::lighting.ssaoEnabled);
+    currentSp->set("ambientOcclusionMap", 7);
+    currentSp->set("ssaoEnabled", Lighting::lighting.ssaoEnabled);
 
-        Display::display.flashCamera().getFlash().configureShaderProgram(currentSp, "cameraFlash");
+    Display::display.flashCamera().getFlash().configureShaderProgram(currentSp, "cameraFlash");
 
-        currentSp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
+    currentSp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
 
-        int index = 0;
-        int count = 0;
-        for (ParallelLight& pl: Lighting::lighting.parallelLights) {
-            pl.configureShaderProgram(currentSp, QStringLiteral("parallelLights[%1]").arg(index));
-            glActiveTexture(GL_TEXTURE9 + count);
-            glBindTexture(GL_TEXTURE_2D, pl.getShadow().getShadowTexture());
-            currentSp->set(QStringLiteral("parallelLightShadowMaps[%1]").arg(index), 9 + count);
-            index++, count++;
-        }
+    int index = 0;
+    int count = 0;
+    for (ParallelLight& pl: Lighting::lighting.parallelLights) {
+        pl.configureShaderProgram(currentSp, QStringLiteral("parallelLights[%1]").arg(index));
+        glActiveTexture(GL_TEXTURE9 + count);
+        glBindTexture(GL_TEXTURE_2D, pl.getShadow().getShadowTexture());
+        currentSp->set(QStringLiteral("parallelLightShadowMaps[%1]").arg(index), 9 + count);
+        index++, count++;
+    }
 
-        currentSp->set("pointLightCount", int(Lighting::lighting.pointLights.size()));
+    currentSp->set("pointLightCount", int(Lighting::lighting.pointLights.size()));
 
-        index = 0;
-        for (ShadowCastingPointLight& sl : Lighting::lighting.pointLights) {
-            if (index == Lighting::lighting.pickedPointLightIndex) sl.setPosition(Display::display.mouseCamera().getTarget());
-            sl.configureShaderProgram(currentSp, QStringLiteral("pointLights[%1]").arg(index));
-            glActiveTexture(GL_TEXTURE9 + count);
-            glBindTexture(GL_TEXTURE_2D, sl.getShadow().getShadowTexture());
-            currentSp->set<int>(QStringLiteral("pointLightShadowMaps[%1]").arg(index), 9 + count);
-            index++, count++;
-        }
+    index = 0;
+    for (ShadowCastingPointLight& sl : Lighting::lighting.pointLights) {
+        if (index == Lighting::lighting.pickedPointLightIndex) sl.setPosition(Display::display.mouseCamera().getTarget());
+        sl.configureShaderProgram(currentSp, QStringLiteral("pointLights[%1]").arg(index));
+        glActiveTexture(GL_TEXTURE9 + count);
+        glBindTexture(GL_TEXTURE_2D, sl.getShadow().getShadowTexture());
+        currentSp->set<int>(QStringLiteral("pointLightShadowMaps[%1]").arg(index), 9 + count);
+        index++, count++;
+    }
 
-        currentSp->set("spotlightCount", int(Lighting::lighting.spotlights.size()));
+    currentSp->set("spotlightCount", int(Lighting::lighting.spotlights.size()));
 
-        index = 0;
-        for (ShadowCastingSpotlight& ss : Lighting::lighting.spotlights) {
-            if (index == Lighting::lighting.pickedSpotlightIndex) ss.setPosition(Display::display.mouseCamera().getTarget());
-            ss.configureShaderProgram(currentSp, QStringLiteral("spotlights[%1]").arg(index));
-            glActiveTexture(GL_TEXTURE9 + count);
-            glBindTexture(GL_TEXTURE_2D, ss.getShadow().getShadowTexture());
-            currentSp->set<int>(QStringLiteral("spotlightShadowMaps[%1]").arg(index), 9 + count);
-            index++, count++;
-        }
+    index = 0;
+    for (ShadowCastingSpotlight& ss : Lighting::lighting.spotlights) {
+        if (index == Lighting::lighting.pickedSpotlightIndex) ss.setPosition(Display::display.mouseCamera().getTarget());
+        ss.configureShaderProgram(currentSp, QStringLiteral("spotlights[%1]").arg(index));
+        glActiveTexture(GL_TEXTURE9 + count);
+        glBindTexture(GL_TEXTURE_2D, ss.getShadow().getShadowTexture());
+        currentSp->set<int>(QStringLiteral("spotlightShadowMaps[%1]").arg(index), 9 + count);
+        index++, count++;
+    }
 
-        currentSp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
+    currentSp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
 
-        currentSp->set("cameraPosition", Display::display.mouseCamera().getPosition());
-        currentSp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
+    currentSp->set("cameraPosition", Display::display.mouseCamera().getPosition());
+    currentSp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
 
-        currentSp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
+    currentSp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
         
-        currentSp->set("shadowEnabled", Lighting::lighting.shadowSettings.enabled);
+    currentSp->set("shadowEnabled", Lighting::lighting.shadowSettings.enabled);
 
-        Display::screenQuad->draw(*currentSp);
+    Display::screenQuad->draw(*currentSp);
 
-        glBlitNamedFramebuffer(gBuffer->getFramebuffer(), hdrFramebuffer,
-            0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT,
-            0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT,
-            GL_DEPTH_BUFFER_BIT, GL_NEAREST
-        );
-    }
-    else {
-        // forward rendering 
-        sp->set("pointLightShadowMap", 1);
-
-        Display::display.mouseCamera().configureShaderProgram(sp);
-
-        sp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
-        int index = 0;
-        for (ParallelLight& pl : Lighting::lighting.parallelLights) {
-            pl.configureShaderProgram(sp, QStringLiteral("parallelLights[%1]").arg(index));
-            glActiveTexture(GL_TEXTURE9 + index);
-            glBindTexture(GL_TEXTURE_2D, pl.getShadow().getShadowTexture());
-            sp->set(QStringLiteral("parallelLightShadowMaps[%1]").arg(index), 9 + index);
-            index++;
-        }
-
-        sp->set("pointLightCount", int(Lighting::lighting.pointLights.size()));
-        index = 0;
-        for (ShadowCastingPointLight& sl : Lighting::lighting.pointLights) {
-            sl.configureShaderProgram(sp, QStringLiteral("pointLights[%1]").arg(index));
-            glActiveTexture(GL_TEXTURE9 + Lighting::lighting.parallelLights.size() + index);
-            glBindTexture(GL_TEXTURE_2D, sl.getShadow().getShadowTexture());
-            sp->set<int>(QStringLiteral("pointLightShadowMaps[%1]").arg(index), 9 + Lighting::lighting.parallelLights.size() + index);
-            index++;
-        }
-
-        Display::display.flashCamera().getFlash().configureShaderProgram(sp, "cameraFlash");
-
-        sp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
-
-        sp->set("cameraPosition", Display::display.mouseCamera().getPosition());
-        sp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
-
-        sp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
-        sp->set("blinnPhong", Lighting::lighting.blinnPhong);
-        sp->set("shadowEnabled", Lighting::lighting.shadowSettings.enabled);
-
-        for (Object3D* object : Data::getInstance().getObjects()) {
-            if (object->isFaceCullingEnabled()) {
-                glEnable(GL_CULL_FACE);
-                glCullFace(object->getCulledFace());
-            }
-            else glDisable(GL_CULL_FACE);
-            object->draw(*sp);
-        }
-
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
-        float zoomDistance = Data::getInstance().getZoomDistance();
-        if (zoomDistance < 1e-6f) zoomDistance = Display::display.mouseCamera().FAR_PLANE_DISTANCE;
-        Display::horizon->setScale(vec3(zoomDistance));
-        Display::horizon->draw(*sp);
-    }
+    glBlitNamedFramebuffer(gBuffer->getFramebuffer(), hdrFramebuffer,
+        0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT,
+        0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT,
+        GL_DEPTH_BUFFER_BIT, GL_NEAREST
+    );
 
     /// light sources
     glLineWidth(1.0f);

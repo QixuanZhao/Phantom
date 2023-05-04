@@ -187,9 +187,7 @@ bool SpotlightModel::insertRows(int row, int count, const QModelIndex& parent)
 	beginInsertRows(parent, row, row + count - 1);
 	ShadowCastingSpotlight light;
 	light.setName("Light");
-	light.setRadiometric(GLConfiguration::configuration.pbrEnabled);
-	light.setDiffuse(vec3(1.0f));
-	light.setSpecular(vec3(1.0f));
+	light.setRadiometric(true);
 	light.setColour(vec3(1.0f));
 	light.setPower(1.0f);
 	light.setPosition(Display::display.observerCamera.getTarget());
