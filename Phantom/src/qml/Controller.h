@@ -73,8 +73,13 @@ public:
 	Q_INVOKABLE void grabCursor();
 	Q_INVOKABLE void releaseCursor();
 
-	Q_INVOKABLE void press(Qt::Key key);
-	Q_INVOKABLE void release(Qt::Key key);
+	Q_INVOKABLE void pressKey(Qt::Key key);
+	Q_INVOKABLE void releaseKey(Qt::Key key);
+
+	Q_INVOKABLE void pressButton(Qt::MouseButton button);
+	Q_INVOKABLE void releaseButton(Qt::MouseButton button);
+	
+	Q_INVOKABLE void setMouseCenter(const QPoint& center);
 signals:
 	void cameraTypeChanged();
 
@@ -89,6 +94,4 @@ protected:
 	ShadowController shadowController;
 	DebugController debugController;
 	GraphicsController graphicsController;
-
-	QCursor cursor;
 };

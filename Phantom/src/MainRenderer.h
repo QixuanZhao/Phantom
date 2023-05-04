@@ -21,6 +21,7 @@ protected:
 	virtual void render() override;
 
     void processKeyboard();
+    void processMouse();
 
     GLuint hdrFramebuffer;
     GLuint hdrDepthRenderbuffer;

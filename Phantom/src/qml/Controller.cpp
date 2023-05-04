@@ -2,27 +2,43 @@
 
 void Controller::controlCursor(const QPoint& pos)
 {
-	Display::display.mouseCamera().setMouse(pos.x(), pos.y());
-	cursor.setPos(pos);
+	getFPSCameraController()->setMouse(pos);
+	QCursor::setPos(pos);
 }
 
 void Controller::grabCursor()
 {
-	cursor.setShape(Qt::CursorShape::BlankCursor);
-	QApplication::setOverrideCursor(cursor);
+	Control::instance().catchMouse = true;
+	QApplication::setOverrideCursor(Control::instance().cursor);
 }
 
 void Controller::releaseCursor()
 {
+	Control::instance().catchMouse = false;
 	QApplication::restoreOverrideCursor();
 }
 
-void Controller::press(Qt::Key key)
+void Controller::pressKey(Qt::Key key)
 {
-	Control::control.pressedKeys.insert(key);
+	Control::instance().pressedKeys.insert(key);
 }
 
-void Controller::release(Qt::Key key)
+void Controller::releaseKey(Qt::Key key)
 {
-	Control::control.pressedKeys.remove(key);
+	Control::instance().pressedKeys.remove(key);
+}
+
+void Controller::pressButton(Qt::MouseButton button)
+{
+	Control::instance().pressedButtons.insert(button);
+}
+
+void Controller::releaseButton(Qt::MouseButton button)
+{
+	Control::instance().pressedButtons.remove(button);
+}
+
+void Controller::setMouseCenter(const QPoint& center)
+{
+	Control::instance().center = center;
 }

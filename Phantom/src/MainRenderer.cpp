@@ -208,6 +208,7 @@ void MainRenderer::render()
 	lastFrame = now;
 
     processKeyboard();
+    processMouse();
 
     if (firstFrame) firstFrame = false;
 
@@ -600,31 +601,31 @@ void MainRenderer::render()
 
 void MainRenderer::processKeyboard()
 {
-    if (!Display::display.observerMode) {
+    if (!Display::display.observerMode && Control::instance().catchMouse) {
         int horizontalMove = 0;
         int verticalMove = 0;
 
         float dtime = deltaTime / 100.0f;
 
-        if (Control::control.pressedKeys.contains(Qt::Key::Key_Shift)) dtime *= 10.0f;
+        if (Control::instance().pressedKeys.contains(Qt::Key::Key_Shift)) dtime *= 10.0f;
 
-        if (Control::control.pressedKeys.contains(Qt::Key::Key_W) ||
-            Control::control.pressedKeys.contains(Qt::Key::Key_Up)) {
+        if (Control::instance().pressedKeys.contains(Qt::Key::Key_W) ||
+            Control::instance().pressedKeys.contains(Qt::Key::Key_Up)) {
             verticalMove++;
         }
 
-        if (Control::control.pressedKeys.contains(Qt::Key::Key_S) ||
-            Control::control.pressedKeys.contains(Qt::Key::Key_Down)) {
+        if (Control::instance().pressedKeys.contains(Qt::Key::Key_S) ||
+            Control::instance().pressedKeys.contains(Qt::Key::Key_Down)) {
             verticalMove--;
         }
 
-        if (Control::control.pressedKeys.contains(Qt::Key::Key_D) ||
-            Control::control.pressedKeys.contains(Qt::Key::Key_Right)) {
+        if (Control::instance().pressedKeys.contains(Qt::Key::Key_D) ||
+            Control::instance().pressedKeys.contains(Qt::Key::Key_Right)) {
             horizontalMove++;
         }
 
-        if (Control::control.pressedKeys.contains(Qt::Key::Key_A) ||
-            Control::control.pressedKeys.contains(Qt::Key::Key_Left)) {
+        if (Control::instance().pressedKeys.contains(Qt::Key::Key_A) ||
+            Control::instance().pressedKeys.contains(Qt::Key::Key_Left)) {
             horizontalMove--;
         }
 
@@ -648,5 +649,28 @@ void MainRenderer::processKeyboard()
             else if (verticalMove < 0)
                 Display::display.fpsCamera.move(FPSCamera::Direction::BACKWARD, dtime);
 
+    }
+}
+
+void MainRenderer::processMouse()
+{
+    QPoint pos = QCursor::pos();
+    if (!Display::display.observerMode && Control::instance().catchMouse) {
+        Display::display.fpsCamera.mouse(pos.x(), pos.y());
+
+        QPoint center = Control::instance().center;
+        Display::display.fpsCamera.setMouse(center.x(), center.y());
+        QCursor::setPos(center);
+    }
+    else if (Display::display.observerMode) {
+        if (Control::instance().pressedButtons.contains(Qt::MouseButton::LeftButton))
+            Display::display.observerCamera.unlockView();
+        else Display::display.observerCamera.lockView();
+
+        if (Control::instance().pressedButtons.contains(Qt::MouseButton::RightButton))
+            Display::display.observerCamera.unlockTranslation();
+        else Display::display.observerCamera.lockTranslation();
+
+        Display::display.observerCamera.mouse(pos.x(), pos.y());
     }
 }

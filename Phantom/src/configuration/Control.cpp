@@ -1,3 +1,3 @@
 #include "stdafx.h"
 
-Control Control::control;
+Control * Control::control = nullptr;

@@ -25,7 +25,6 @@ public:
 	FPSCamera fpsCamera;
 
 	bool observerMode = true;
-	bool catchMouse = false;
 
 	const int TEXTURE_WIDTH = 1920;
 	const int TEXTURE_HEIGHT = 1080;

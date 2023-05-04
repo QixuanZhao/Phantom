@@ -248,6 +248,13 @@ ApplicationWindow {
                 property bool observerMode: controller.cameraType === Controller.CameraType.Observer
                 property bool catchMouse: false
 
+                function setCenter () {
+                    controller.setMouseCenter(mapToGlobal(width / 2, height / 2))
+                }
+
+                onWidthChanged: setCenter()
+                onHeightChanged: setCenter()
+
                 onObserverModeChanged: {
                     if (observerMode) {
                         cursorShape = Qt.OpenHandCursor
@@ -259,14 +266,16 @@ ApplicationWindow {
 
                 Keys.onPressed: event => {
                     if (!event.isAutoRepeat)
-                        controller.press(event.key);
+                        controller.pressKey(event.key);
                     if (event.modifiers & Qt.ControlModifier) {
                         if (!observerMode) {
                             catchMouse = !catchMouse
                             cursorShape = catchMouse ? Qt.BlankCursor : Qt.ArrowCursor
 
-                            if (catchMouse) controller.grabCursor()
-                            else controller.releaseCursor()
+                            if (catchMouse) {
+                                controller.grabCursor()
+                                controller.camera.setMouse(mapToGlobal(Qt.point(mouseX, mouseY)))
+                            } else controller.releaseCursor()
 
                             controller.camera.viewLock = !catchMouse
                             event.accepted = true
@@ -275,41 +284,19 @@ ApplicationWindow {
                 }
 
                 Keys.onReleased: event => {
-                    if (!event.isAutoRepeat) controller.release(event.key);
+                    if (!event.isAutoRepeat) controller.releaseKey(event.key);
                 }
 
                 onPressed: (mouse) => {
+                    controller.pressButton(mouse.button)
                     forceActiveFocus()
-                    controller.camera.setMouse(mapToGlobal(Qt.point(mouse.x, mouse.y)))
-
-                    if (observerMode) {
-                        rendererMouse.cursorShape = Qt.ClosedHandCursor
-                        if (mouse.button === Qt.LeftButton)
-                            controller.camera.viewLock = false
-                        else if (mouse.button === Qt.RightButton)
-                            controller.observerCamera.translationLock = false
-                    }
                 }
                 onReleased: (mouse) => {
+                    controller.releaseButton(mouse.button)
                     forceActiveFocus()
-                    if (observerMode) {
-                        rendererMouse.cursorShape = Qt.OpenHandCursor
-
-                        if (mouse.button === Qt.LeftButton)
-                            controller.camera.viewLock = true
-                        else if (mouse.button === Qt.RightButton)
-                            controller.observerCamera.translationLock = true
-                    }
                 }
                 onWheel: (wheel) => {
                     controller.camera.wheel(wheel.angleDelta)
-                }
-                onPositionChanged: (mouse) => {
-                    controller.camera.mouse(mapToGlobal(Qt.point(mouse.x, mouse.y)))
-                    if (catchMouse) {
-                        controller.controlCursor(
-                            mapToGlobal(Qt.point(rendererMouse.width / 2, rendererMouse.height / 2)))
-                    }
                 }
             }
 
@@ -338,6 +325,31 @@ ApplicationWindow {
                 }
 
                 Label {
+                    text: qsTr("Global Cursor: (%1, %2)")
+                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.mouseX, 0)).x)
+                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.mouseY)).y)
+                }
+
+                Label {
+                    text: qsTr("Size: (%1, %2) ⨉ %3")
+                        .arg(rendererMouse.width)
+                        .arg(rendererMouse.height)
+                        .arg(Screen.devicePixelRatio)
+                }
+
+                Label {
+                    text: qsTr("Global Corner: (%1, %2)")
+                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.width, 0)).x - rendererMouse.width)
+                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.height)).y - rendererMouse.height)
+                }
+
+                Label {
+                    text: qsTr("Global Corner: (%1, %2)")
+                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.width, 0)).x)
+                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.height)).y)
+                }
+
+                Label {
                     text: qsTr("Attitude: (%1°, %2°, %3°)").arg(controller.camera.pitch).arg(controller.camera.yaw).arg(controller.camera.roll)
                 }
 
@@ -351,10 +363,10 @@ ApplicationWindow {
 
                 Label {
                     text: qsTr("Mouse %1 (%2)").arg(rendererMouse.catchMouse ? qsTr("Trapped") : qsTr("Free")).arg(
-                              rendererMouse.observerMode ? qsTr("Change to FPS camera to enable") : (
-                                                               rendererMouse.activeFocus ? qsTr("press CTRL to toggle") : qsTr("unfocused")
-                                                               )
-                              )
+                        rendererMouse.observerMode ? qsTr("Change to FPS camera to enable") : (
+                            rendererMouse.activeFocus ? qsTr("press CTRL to toggle") : qsTr("unfocused")
+                        )
+                    )
 
                 }
             }
