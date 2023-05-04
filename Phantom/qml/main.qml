@@ -321,39 +321,6 @@ ApplicationWindow {
                 }
 
                 Label {
-                    text: qsTr("Cursor: (%1, %2)").arg(rendererMouse.mouseX).arg(rendererMouse.mouseY)
-                }
-
-                Label {
-                    text: qsTr("Global Cursor: (%1, %2)")
-                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.mouseX, 0)).x)
-                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.mouseY)).y)
-                }
-
-                Label {
-                    text: qsTr("Size: (%1, %2) ⨉ %3")
-                        .arg(rendererMouse.width)
-                        .arg(rendererMouse.height)
-                        .arg(Screen.devicePixelRatio)
-                }
-
-                Label {
-                    text: qsTr("Global Corner: (%1, %2)")
-                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.width, 0)).x - rendererMouse.width)
-                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.height)).y - rendererMouse.height)
-                }
-
-                Label {
-                    text: qsTr("Global Corner: (%1, %2)")
-                        .arg(rendererMouse.mapToGlobal(Qt.point(rendererMouse.width, 0)).x)
-                        .arg(rendererMouse.mapToGlobal(Qt.point(0, rendererMouse.height)).y)
-                }
-
-                Label {
-                    text: qsTr("Attitude: (%1°, %2°, %3°)").arg(controller.camera.pitch).arg(controller.camera.yaw).arg(controller.camera.roll)
-                }
-
-                Label {
                     text: qsTr("Distance: %1").arg(controller.observerCamera.distance)
                 }
 
