@@ -56,27 +56,22 @@ public:
     inline void setSpeed(const float& speed) { this->speed = speed; }
 
     inline virtual void setPitch(const float& pitch) override {
-        Camera::setPitch(pitch);
+        FlashCamera::setPitch(pitch);
         target = distance * front + position;
     }
 
     inline virtual void setYaw(const float& yaw) override {
-        Camera::setYaw(yaw);
+        FlashCamera::setYaw(yaw);
         target = distance * front + position;
     }
 
     inline virtual void setYawAndPitch(const float& yaw, const float& pitch) override {
-        Camera::setYawAndPitch(yaw, pitch);
+        FlashCamera::setYawAndPitch(yaw, pitch);
         target = distance * front + position;
     }
 
     inline virtual void setPosition(const vec3& position) override {
-        Camera::setPosition(position);
-        target = distance * front + position;
-    }
-
-    inline virtual void setPosition(const float& x, const float& y, const float& z) override {
-        Camera::setPosition(x, y, z);
+        FlashCamera::setPosition(position);
         target = distance * front + position;
     }
 

@@ -14,15 +14,24 @@ Item {
     Component.onCompleted: {
         controller.cameraType = Qt.binding(() => cameraTypeComboBox.currentIndex)
 
-        controller.camera.flashOn = Qt.binding(() => flashSwitch.checked)
+        controller.observerCamera.flashOn = Qt.binding(() => flashSwitch.checked)
+        controller.fpsCamera.flashOn = Qt.binding(() => flashSwitch.checked)
 
-        controller.camera.flash.colour = Qt.binding(() => flashRadiantFluxGroupBox.colour)
-        controller.camera.flash.power = Qt.binding(() => flashRadiantFluxGroupBox.power)
-        controller.camera.flash.specular = Qt.binding(() => flashRadiantFluxGroupBox.flux)
-        controller.camera.flash.diffuse = Qt.binding(() => flashRadiantFluxGroupBox.flux)
+        controller.observerCamera.flash.colour = Qt.binding(() => flashRadiantFluxGroupBox.colour)
+        controller.observerCamera.flash.power = Qt.binding(() => flashRadiantFluxGroupBox.power)
+        controller.observerCamera.flash.specular = Qt.binding(() => flashRadiantFluxGroupBox.flux)
+        controller.observerCamera.flash.diffuse = Qt.binding(() => flashRadiantFluxGroupBox.flux)
 
-        controller.camera.flash.innerCutOff = Qt.binding(() => flashCutoffGroupBox.innerCutoff)
-        controller.camera.flash.outerCutOff = Qt.binding(() => flashCutoffGroupBox.outerCutoff)
+        controller.observerCamera.flash.innerCutOff = Qt.binding(() => flashCutoffGroupBox.innerCutoff)
+        controller.observerCamera.flash.outerCutOff = Qt.binding(() => flashCutoffGroupBox.outerCutoff)
+
+        controller.fpsCamera.flash.colour = Qt.binding(() => flashRadiantFluxGroupBox.colour)
+        controller.fpsCamera.flash.power = Qt.binding(() => flashRadiantFluxGroupBox.power)
+        controller.fpsCamera.flash.specular = Qt.binding(() => flashRadiantFluxGroupBox.flux)
+        controller.fpsCamera.flash.diffuse = Qt.binding(() => flashRadiantFluxGroupBox.flux)
+
+        controller.fpsCamera.flash.innerCutOff = Qt.binding(() => flashCutoffGroupBox.innerCutoff)
+        controller.fpsCamera.flash.outerCutOff = Qt.binding(() => flashCutoffGroupBox.outerCutoff)
     }
 
     ColumnLayout {
