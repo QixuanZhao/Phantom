@@ -23,7 +23,7 @@ ApplicationWindow {
             }
         }
         Menu {
-            title: qsTr("&Settings")
+            title: qsTr("&Interface")
             Action {
                 icon.source: "qrc:/static/res/icons/translate_FILL0_wght400_GRAD0_opsz48.svg"
                 text: qsTr("&Language")
@@ -114,10 +114,10 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.minimumHeight: childrenRect.height
 
-                        TabButton { text: qsTr("Display %1").arg(displayPanel.width) }
-                        TabButton { text: qsTr("Camera %1").arg(cameraPanel.width) }
-                        TabButton { text: qsTr("Lighting %1").arg(lightingPanel.width) }
-                        TabButton { text: qsTr("Graphics %1").arg(graphicsPanel.width) }
+                        TabButton { text: qsTr("Display") }
+                        TabButton { text: qsTr("Camera") }
+                        TabButton { text: qsTr("Lighting") }
+                        TabButton { text: qsTr("Graphics") }
                     }
 
                     StackLayout {
@@ -130,9 +130,6 @@ ApplicationWindow {
                         property int maxContentWidth: Math.max(displayScrollView.width, cameraScrollView.width, lightingScrollView.width, graphicsScrollView.width)
 
                         Component.onCompleted: {
-                            controller.debug.log('s   width: <span style="color: grey">%1</span>'.arg(stack.width))
-                            controller.debug.log('max width: <span style="color: pink">%1</span>'.arg(maxContentWidth))
-
                             let panels = [displayScrollView, cameraScrollView, lightingScrollView, graphicsScrollView]
                             for (let i in panels) {
                                 console.log("loop:", i, panels[i].width, maxContentWidth, panels[i].contentWidth, panels[i].availableWidth)

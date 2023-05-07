@@ -30,37 +30,37 @@
 <context>
     <name>CameraPanel</name>
     <message>
-        <location filename="qml/CameraPanel.qml" line="43"/>
+        <location filename="qml/CameraPanel.qml" line="42"/>
         <source>Camera Mode</source>
         <translation>相机模式</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="52"/>
+        <location filename="qml/CameraPanel.qml" line="50"/>
         <source>Observer</source>
         <translation>观察者</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="53"/>
+        <location filename="qml/CameraPanel.qml" line="51"/>
         <source>FPS</source>
         <translation>第一人称射击</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="61"/>
+        <location filename="qml/CameraPanel.qml" line="59"/>
         <source>Flashlight</source>
         <translation>手电筒</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="67"/>
+        <location filename="qml/CameraPanel.qml" line="65"/>
         <source>Flash %1</source>
         <translation>手电筒 %1</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="67"/>
+        <location filename="qml/CameraPanel.qml" line="65"/>
         <source>On</source>
         <translation>开</translation>
     </message>
     <message>
-        <location filename="qml/CameraPanel.qml" line="67"/>
+        <location filename="qml/CameraPanel.qml" line="65"/>
         <source>Off</source>
         <translation>关</translation>
     </message>
@@ -141,38 +141,38 @@
         <translation>背景色</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="46"/>
+        <location filename="qml/DisplayPanel.qml" line="45"/>
         <source>Gamma</source>
         <translation>伽马</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="70"/>
+        <location filename="qml/DisplayPanel.qml" line="68"/>
         <source>Blur</source>
         <translation>模糊</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="86"/>
+        <location filename="qml/DisplayPanel.qml" line="84"/>
         <source>Passes: %1</source>
         <translation>轮数：%1</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="108"/>
+        <location filename="qml/DisplayPanel.qml" line="106"/>
         <source>Show Axes</source>
         <translation>显示坐标轴</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="115"/>
+        <location filename="qml/DisplayPanel.qml" line="113"/>
         <source>Tone Mapping</source>
         <translation>色调映射</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="127"/>
+        <location filename="qml/DisplayPanel.qml" line="125"/>
         <source>Reinhard</source>
         <translation>Reinhard</translation>
     </message>
     <message>
-        <location filename="qml/DisplayPanel.qml" line="128"/>
-        <location filename="qml/DisplayPanel.qml" line="140"/>
+        <location filename="qml/DisplayPanel.qml" line="126"/>
+        <location filename="qml/DisplayPanel.qml" line="138"/>
         <source>Exposure</source>
         <translation>曝光度</translation>
     </message>
@@ -546,97 +546,101 @@
         <translation>打开 (&amp;O)</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="26"/>
         <source>&amp;Settings</source>
-        <translation>设置（&amp;S）</translation>
+        <translation type="vanished">设置（&amp;S）</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="28"/>
+        <location filename="qml/main.qml" line="26"/>
+        <source>&amp;Interface</source>
+        <translation>界面（&amp;I）</translation>
+    </message>
+    <message>
+        <location filename="qml/main.qml" line="29"/>
         <source>&amp;Language</source>
         <translation>语言（&amp;L）</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="36"/>
+        <location filename="qml/main.qml" line="37"/>
         <source>Choose Files</source>
         <translation>选择文件</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="38"/>
+        <location filename="qml/main.qml" line="39"/>
         <source>3D Object (*.obj)</source>
         <translation>三维模型 (*.obj)</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="51"/>
+        <location filename="qml/main.qml" line="52"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="55"/>
+        <location filename="qml/main.qml" line="56"/>
         <source>Current Language</source>
         <translation>当前语言</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="71"/>
+        <location filename="qml/main.qml" line="72"/>
         <source>Simplified Chinese</source>
         <translation>简体中文</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="72"/>
+        <location filename="qml/main.qml" line="73"/>
         <source>Traditional Chinese</source>
         <translation>繁体中文</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="73"/>
+        <location filename="qml/main.qml" line="74"/>
         <source>English</source>
         <translation>英语</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="118"/>
+        <location filename="qml/main.qml" line="117"/>
         <source>Display</source>
         <translation>显示</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="119"/>
+        <location filename="qml/main.qml" line="118"/>
         <source>Camera</source>
         <translation>相机</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="120"/>
+        <location filename="qml/main.qml" line="119"/>
         <source>Lighting</source>
         <translation>光照</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="236"/>
+        <location filename="qml/main.qml" line="240"/>
         <source>Analytical Light</source>
         <translation>分析光</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="359"/>
+        <location filename="qml/main.qml" line="363"/>
         <source>Mouse %1 (%2)</source>
         <translation>鼠标%1（%2）</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="359"/>
+        <location filename="qml/main.qml" line="363"/>
         <source>Trapped</source>
         <translation>已捕捉</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="359"/>
+        <location filename="qml/main.qml" line="363"/>
         <source>Free</source>
         <translation>自由</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="360"/>
+        <location filename="qml/main.qml" line="364"/>
         <source>Change to FPS camera to enable</source>
         <translation>切换到第一人称射击相机以启用</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="361"/>
+        <location filename="qml/main.qml" line="365"/>
         <source>press CTRL to toggle</source>
         <translation>按CTRL以切换</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="361"/>
+        <location filename="qml/main.qml" line="365"/>
         <source>unfocused</source>
         <translation>未聚焦</translation>
     </message>
@@ -765,7 +769,7 @@
         <translation type="vanished">颜色</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="121"/>
+        <location filename="qml/main.qml" line="120"/>
         <source>Graphics</source>
         <translation>图形</translation>
     </message>
@@ -794,22 +798,22 @@
         <translation type="vanished">轮数：%1</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="78"/>
+        <location filename="qml/main.qml" line="79"/>
         <source>Gaussian</source>
         <translation>高斯</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="79"/>
+        <location filename="qml/main.qml" line="80"/>
         <source>Box</source>
         <translation>盒式</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="80"/>
+        <location filename="qml/main.qml" line="81"/>
         <source>Kawase</source>
         <translation>川瀬</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="81"/>
+        <location filename="qml/main.qml" line="82"/>
         <source>Dual</source>
         <translation>双重</translation>
     </message>
@@ -942,7 +946,7 @@
         <translation type="vanished">清除全部</translation>
     </message>
     <message>
-        <location filename="qml/main.qml" line="355"/>
+        <location filename="qml/main.qml" line="359"/>
         <source>FPS: %1</source>
         <translation>帧率：%1</translation>
     </message>
