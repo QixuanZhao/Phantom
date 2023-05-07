@@ -25,6 +25,7 @@ ApplicationWindow {
         Menu {
             title: qsTr("&Settings")
             Action {
+                icon.source: "qrc:/static/res/icons/translate_FILL0_wght400_GRAD0_opsz48.svg"
                 text: qsTr("&Language")
                 onTriggered: languageDialog.open()
             }
@@ -99,9 +100,8 @@ ApplicationWindow {
             Pane {
                 id: leftTopItem
                 SplitView.fillHeight: true
+                SplitView.fillWidth: true
                 implicitWidth: childrenRect.width
-                anchors.left: leftColumn.left
-                anchors.right: leftColumn.right
                 padding: 0
 
                 ColumnLayout {
@@ -132,6 +132,8 @@ ApplicationWindow {
                             controller.debug.log('s   width: <span style="color: grey">%1</span>'.arg(stack.width))
                             controller.debug.log('dsv width: <span style="color: pink">%1</span>'.arg(displayScrollView.width))
                             controller.debug.log('dp  width: <span style="color: pink">%1</span>'.arg(displayPanel.width))
+                            controller.debug.log('lsv width: <span style="color: green">%1</span>'.arg(cameraScrollView.width))
+                            controller.debug.log('lp  width: <span style="color: green">%1</span>'.arg(cameraPanel.width))
                             controller.debug.log('lsv width: <span style="color: green">%1</span>'.arg(lightingScrollView.width))
                             controller.debug.log('lp  width: <span style="color: green">%1</span>'.arg(lightingPanel.width))
                             controller.debug.log('gsv width: <span style="color: cyan">%1</span>'.arg(graphicsScrollView.width))

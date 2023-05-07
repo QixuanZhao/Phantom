@@ -84,6 +84,10 @@ public:
 	Q_INVOKABLE inline void retranslate(const QLocale& locale) {
 		Control::instance().retranslate(locale);
 	}
+
+	Q_INVOKABLE inline void reload() {
+		Control::instance().engine.load(":/qml/main.qml");
+	}
 signals:
 	void cameraTypeChanged();
 

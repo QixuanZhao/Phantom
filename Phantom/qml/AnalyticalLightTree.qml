@@ -82,10 +82,6 @@ TreeView {
         onIsCurrentChanged: {
             if (isSpotlight(type)) {
                 if (isCurrent) {
-//                    directionGroupBox.azimuth = direction.x
-//                    directionGroupBox.altitude = direction.y
-//                    spotlightCutoffGroupBox.innerCutoff = cutoff.x
-//                    spotlightCutoffGroupBox.outerCutoff = cutoff.y
                     direction = Qt.binding(() => Qt.vector2d(directionGroupBox.azimuth, directionGroupBox.altitude))
                     cutoff = Qt.binding(() => Qt.vector2d(spotlightCutoffGroupBox.innerCutoff, spotlightCutoffGroupBox.outerCutoff))
                 } else {
@@ -94,8 +90,6 @@ TreeView {
                 }
             } else if (isParallelLight(type)) {
                 if (isCurrent) {
-//                    directionGroupBox.azimuth = direction.x
-//                    directionGroupBox.altitude = direction.y
                     direction = Qt.binding(() => Qt.vector2d(directionGroupBox.azimuth, directionGroupBox.altitude))
                 } else {
                     direction = direction
@@ -103,8 +97,6 @@ TreeView {
             }
 
             if (isCurrent) {
-//                radiantFluxGroupBox.colour = colour
-//                radiantFluxGroupBox.power = power
                 colour = Qt.binding(() => radiantFluxGroupBox.colour)
                 power = Qt.binding(() => radiantFluxGroupBox.power)
             } else {

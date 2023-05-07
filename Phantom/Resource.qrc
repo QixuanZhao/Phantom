@@ -71,6 +71,7 @@
         <file>res/icons/light_FILL0_wght400_GRAD0_opsz48.svg</file>
         <file>res/icons/highlight_FILL0_wght400_GRAD0_opsz48.svg</file>
         <file>res/icons/drag_pan_FILL0_wght400_GRAD0_opsz48.svg</file>
+        <file>res/icons/translate_FILL0_wght400_GRAD0_opsz48.svg</file>
     </qresource>
     <qresource prefix="/i18n">
         <file>Translation_zh_CN.ts</file>
