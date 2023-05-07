@@ -31,6 +31,7 @@ Item {
             text: qsTr("Background Colour")
             Layout.row: 0
             Layout.column: 0
+            Layout.alignment: Qt.AlignTrailing
         }
         ColourPicker {
             id: backgroundColourPicker
@@ -45,6 +46,7 @@ Item {
             text: qsTr("Gamma")
             Layout.row: 1
             Layout.column: 0
+            Layout.alignment: Qt.AlignTrailing
         }
         Slider {
             id: gammaSlider

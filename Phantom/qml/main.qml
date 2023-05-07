@@ -266,12 +266,7 @@ ApplicationWindow {
             Renderer {
                 id: renderer
                 anchors.fill: parent
-                transform: Scale { // vertical flip
-                    origin.x: renderer.width / 2
-                    origin.y: renderer.height / 2
-                    yScale: -1
-                }
-
+                mirrorVertically: true
                 onWidthChanged: { this.setViewportSize(Qt.size(width, height)) }
                 onHeightChanged: { this.setViewportSize(Qt.size(width, height)) }
             }
