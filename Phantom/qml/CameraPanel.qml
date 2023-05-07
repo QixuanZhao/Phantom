@@ -39,9 +39,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
 
         RowLayout {
-            Label {
-                text: qsTr("Camera Mode")
-            }
+            Label { text: qsTr("Camera Mode") }
 
             ComboBox {
                 id: cameraTypeComboBox

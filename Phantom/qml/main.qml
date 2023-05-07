@@ -91,8 +91,8 @@ ApplicationWindow {
         SplitView {
             Layout.row: 0
             Layout.column: 0
-            Layout.minimumWidth: leftColumn.implicitWidth
-            Layout.maximumWidth: leftColumn.implicitWidth
+            Layout.minimumWidth: stack.implicitWidth
+            Layout.maximumWidth: stack.implicitWidth
             Layout.fillHeight: true
 
             orientation: Qt.Vertical
@@ -106,8 +106,7 @@ ApplicationWindow {
 
                 ColumnLayout {
                     id: leftColumn
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
+                    anchors.fill: parent
                     spacing: 0
 
                     TabBar {
@@ -115,10 +114,10 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.minimumHeight: childrenRect.height
 
-                        TabButton { text: qsTr("Display") }
-                        TabButton { text: qsTr("Camera") }
-                        TabButton { text: qsTr("Lighting") }
-                        TabButton { text: qsTr("Graphics") }
+                        TabButton { text: qsTr("Display %1").arg(displayPanel.width) }
+                        TabButton { text: qsTr("Camera %1").arg(cameraPanel.width) }
+                        TabButton { text: qsTr("Lighting %1").arg(lightingPanel.width) }
+                        TabButton { text: qsTr("Graphics %1").arg(graphicsPanel.width) }
                     }
 
                     StackLayout {
@@ -128,27 +127,30 @@ ApplicationWindow {
                         Layout.topMargin: 6
                         currentIndex: tabBar.currentIndex
 
+                        property int maxContentWidth: Math.max(displayScrollView.width, cameraScrollView.width, lightingScrollView.width, graphicsScrollView.width)
+
                         Component.onCompleted: {
                             controller.debug.log('s   width: <span style="color: grey">%1</span>'.arg(stack.width))
-                            controller.debug.log('dsv width: <span style="color: pink">%1</span>'.arg(displayScrollView.width))
-                            controller.debug.log('dp  width: <span style="color: pink">%1</span>'.arg(displayPanel.width))
-                            controller.debug.log('lsv width: <span style="color: green">%1</span>'.arg(cameraScrollView.width))
-                            controller.debug.log('lp  width: <span style="color: green">%1</span>'.arg(cameraPanel.width))
-                            controller.debug.log('lsv width: <span style="color: green">%1</span>'.arg(lightingScrollView.width))
-                            controller.debug.log('lp  width: <span style="color: green">%1</span>'.arg(lightingPanel.width))
-                            controller.debug.log('gsv width: <span style="color: cyan">%1</span>'.arg(graphicsScrollView.width))
-                            controller.debug.log('gp  width: <span style="color: cyan">%1</span>'.arg(graphicsPanel.width))
+                            controller.debug.log('max width: <span style="color: pink">%1</span>'.arg(maxContentWidth))
+
+                            let panels = [displayScrollView, cameraScrollView, lightingScrollView, graphicsScrollView]
+                            for (let i in panels) {
+                                console.log("loop:", i, panels[i].width, maxContentWidth, panels[i].contentWidth, panels[i].availableWidth)
+                                if (panels[i].contentWidth !== maxContentWidth) {
+                                    panels[i].contentWidth = Qt.binding(() => panels[i].availableWidth)
+                                }
+                            }
                         }
 
                         ScrollView {
                             id: displayScrollView
                             ScrollBar.vertical.interactive: false
+                            Layout.alignment: Qt.AlignHCenter
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             DisplayPanel {
                                 id: displayPanel
-                                implicitWidth: parent.width
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
@@ -156,12 +158,12 @@ ApplicationWindow {
                         ScrollView {
                             id: cameraScrollView
                             ScrollBar.vertical.interactive: false
+                            Layout.alignment: Qt.AlignHCenter
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             CameraPanel {
                                 id: cameraPanel
-                                implicitWidth: parent.width
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
@@ -169,23 +171,26 @@ ApplicationWindow {
                         ScrollView {
                             id: lightingScrollView
                             ScrollBar.vertical.interactive: false
+                            Layout.alignment: Qt.AlignHCenter
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             LightingPanel {
                                 id: lightingPanel
+                                anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
 
                         ScrollView {
                             id: graphicsScrollView
                             ScrollBar.vertical.interactive: false
+                            Layout.alignment: Qt.AlignHCenter
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             GraphicsPanel {
                                 id: graphicsPanel
-                                implicitWidth: parent.width
+                                anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
                     }
