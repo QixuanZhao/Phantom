@@ -178,6 +178,7 @@ inline void Camera::setYawAndPitch(const float& yaw, const float& pitch) {
 
         if (this->yaw < 0.0f) this->yaw += 360.0f;
     }
+    else this->yaw = yaw;
 
     this->pitch = pitch; 
     computeFront();

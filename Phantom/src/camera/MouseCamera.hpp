@@ -57,6 +57,8 @@ public:
     inline double getLastX() const { return lastX; }
     inline double getLastY() const { return lastY; }
 
+    inline virtual void setDistance(const float& distance) { this->distance = distance; }
+
     inline float getDistance() const { return distance; }
     inline const vec3& getTarget() const { return target; }
 

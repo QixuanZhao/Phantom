@@ -18,6 +18,10 @@ Item {
         id: graphicsPanel
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: 6
+
+        Label {
+            text: qsTr("No Items")
+        }
     }
 
 }

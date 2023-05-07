@@ -30,8 +30,8 @@ public:
         distanceFactor(observerCamera.distanceFactor)
     { }
 
-    inline void setDistance(const float& distance) {
-        this->distance = distance;
+    inline virtual void setDistance(const float& distance) override {
+        MouseCamera::setDistance(distance);
         computeDistanceFactor(distance);
         setPosition(target - front * distance);
     }
@@ -43,7 +43,8 @@ public:
     inline void setTargetAndDistance(const vec3& target, const float& distance) 
     {
         this->target = target;
-        this->distance = distance;
+        MouseCamera::setDistance(distance);
+        computeDistanceFactor(distance);
         setPosition(target - front * distance);
     }
     

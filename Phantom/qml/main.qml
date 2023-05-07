@@ -321,14 +321,6 @@ ApplicationWindow {
                 }
 
                 Label {
-                    text: qsTr("Distance: %1").arg(controller.observerCamera.distance)
-                }
-
-                Label {
-                    text: qsTr("Target: (%1, %2, %3)").arg(controller.observerCamera.target.x).arg(controller.observerCamera.target.y).arg(controller.observerCamera.target.z)
-                }
-
-                Label {
                     text: qsTr("Mouse %1 (%2)").arg(rendererMouse.catchMouse ? qsTr("Trapped") : qsTr("Free")).arg(
                         rendererMouse.observerMode ? qsTr("Change to FPS camera to enable") : (
                             rendererMouse.activeFocus ? qsTr("press CTRL to toggle") : qsTr("unfocused")
