@@ -5,7 +5,9 @@ private:
 	static Control * control;
 
 protected:
-	Control() : cursor(Qt::BlankCursor) { }
+	Control() : cursor(Qt::BlankCursor) {
+		QCoreApplication::installTranslator(&translator);
+	}
 
 public:
 	static inline Control& instance() {
@@ -19,4 +21,9 @@ public:
 	QCursor cursor;
 	QPoint center;
 	bool catchMouse = false;
+
+	QQmlApplicationEngine engine;
+	QTranslator translator;
+
+	void retranslate(const QLocale& locale);
 };

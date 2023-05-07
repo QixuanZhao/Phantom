@@ -75,6 +75,8 @@
     <qresource prefix="/i18n">
         <file>Translation_zh_CN.ts</file>
         <file>Translation_zh_CN.qm</file>
+        <file>Translation_zh_TW.ts</file>
+        <file>Translation_zh_TW.qm</file>
     </qresource>
     <qresource prefix="/effect">
         <file>res/shaders/effect/HueSpectrum.frag.qsb</file>

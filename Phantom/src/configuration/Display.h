@@ -17,6 +17,8 @@ public:
 	static Surface* horizon;
 	static Surface* skybox;
 
+	QLocale locale;
+
 	CoordinateSystem axes;
 
 	vec3 backgroundColour;

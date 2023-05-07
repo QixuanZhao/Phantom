@@ -80,6 +80,10 @@ public:
 	Q_INVOKABLE void releaseButton(Qt::MouseButton button);
 	
 	Q_INVOKABLE void setMouseCenter(const QPoint& center);
+
+	Q_INVOKABLE inline void retranslate(const QLocale& locale) {
+		Control::instance().retranslate(locale);
+	}
 signals:
 	void cameraTypeChanged();
 

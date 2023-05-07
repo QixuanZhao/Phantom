@@ -22,6 +22,13 @@ ApplicationWindow {
                 onTriggered: fileDialog.open()
             }
         }
+        Menu {
+            title: qsTr("&Settings")
+            Action {
+                text: qsTr("&Language")
+                onTriggered: languageDialog.open()
+            }
+        }
     }
 
     QD.FileDialog {
@@ -36,6 +43,34 @@ ApplicationWindow {
 
             controller.camera.zoom();
         }
+    }
+
+    Dialog {
+        id: languageDialog
+
+        title: qsTr("Language")
+        anchors.centerIn: Overlay.overlay
+
+        RowLayout {
+            Label { text: qsTr("Current Language") }
+            ComboBox {
+                id: localeComboBox
+                textRole: "text"
+                valueRole: "value"
+                model: languageModel
+                currentIndex: 0
+                onCurrentValueChanged: {
+                    controller.retranslate(Qt.locale(currentValue));
+                }
+            }
+        }
+    }
+
+    ListModel {
+        id: languageModel
+        ListElement { text: qsTr("Simplified Chinese"); value: "zh_CN" }
+        ListElement { text: qsTr("Traditional Chinese"); value: "zh_TW" }
+        ListElement { text: qsTr("English"); value: "en" }
     }
 
     ListModel {

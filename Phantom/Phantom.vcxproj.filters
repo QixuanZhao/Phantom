@@ -657,5 +657,6 @@
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="Translation_zh_CN.ts" />
+    <QtTranslation Include="Translation_zh_TW.ts" />
   </ItemGroup>
 </Project>

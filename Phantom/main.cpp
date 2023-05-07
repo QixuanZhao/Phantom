@@ -4,12 +4,9 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     app.setWindowIcon(QIcon(":/static/res/icons/ev_shadow_FILL0_wght400_GRAD0_opsz48.svg"));
-
     app.overrideCursor();
 
-    QTranslator translator;
-    if (translator.load(QLocale::system(), "Translation", "_", ":/i18n"))
-        app.installTranslator(&translator);
+    Control::instance().retranslate(QLocale::system());
 
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGL);
     qmlRegisterType<RenderingFramebufferObject>("Phantom", 1, 0, "Renderer");
@@ -40,11 +37,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<GraphicsController>("Phantom", 1, 0, "Graphics");
     qmlRegisterType<Controller>("Phantom", 1, 0, "Controller");
 
-    QQmlApplicationEngine engine;
-    QStringList pathList = engine.importPathList();
-    for (QString path : pathList) {
-        Debug::getInstance().log(path);
-    }
+    QQmlApplicationEngine& engine = Control::instance().engine; 
     engine.addImportPath(":/qml/");
     engine.load(":/qml/main.qml");
 

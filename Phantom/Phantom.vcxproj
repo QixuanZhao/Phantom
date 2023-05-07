@@ -208,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <QtTranslation Include="Translation_zh_CN.ts" />
+    <QtTranslation Include="Translation_zh_TW.ts" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C5C6E51-0EC5-4741-81D1-1D85D888BC0A}</ProjectGuid>
