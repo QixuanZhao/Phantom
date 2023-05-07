@@ -293,6 +293,7 @@ ApplicationWindow {
 
                 onWidthChanged: setCenter()
                 onHeightChanged: setCenter()
+                onPositionChanged: setCenter()
 
                 onObserverModeChanged: {
                     if (observerMode) {
