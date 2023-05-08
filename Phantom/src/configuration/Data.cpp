@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-Data Data::instance;
+Data Data::data;
 
 void Data::computeAABB()
 {

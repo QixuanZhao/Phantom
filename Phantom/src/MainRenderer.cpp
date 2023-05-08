@@ -213,6 +213,17 @@ void MainRenderer::render()
         GLConfiguration::configuration.updated = true;
     }
 
+    Object3D* pickedObject = Data::instance().pickedObject();
+    if (pickedObject) {
+        if (pickedObject->setTranslation(
+            Display::display.mouseCamera().getPosition() +
+            pickedObject->getZoomDistance() * Display::display.mouseCamera().getFront() -
+            pickedObject->center()
+        )) {
+            Lighting::lighting.updateShadow();
+        }
+    }
+
     // depth test
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE);

@@ -176,12 +176,12 @@ bool ParallelLightModel::insertRows(int row, int count, const QModelIndex& paren
 	light.setPower(1.0f);
 	OrthographicShadow& shadow = light.getShadow();
 	shadow.setPosition(
-		Data::getInstance().getZoomTarget()
-		- shadow.getDirection() * Data::getInstance().getZoomDistance() / 1.7f
+		Data::instance().getZoomTarget()
+		- shadow.getDirection() * Data::instance().getZoomDistance() / 1.7f
 	);
 	shadow.setWidthAndHeight(
-		Data::getInstance().getZoomDistance(),
-		Data::getInstance().getZoomDistance()
+		Data::instance().getZoomDistance(),
+		Data::instance().getZoomDistance()
 	);
 	shadow.requireUpdate();
 	list<ParallelLight>::const_iterator it = Lighting::lighting.parallelLights.cbegin();

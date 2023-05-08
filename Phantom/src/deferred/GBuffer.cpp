@@ -78,11 +78,11 @@ void GBuffer::render()
 		sp->set("lightPV", Lighting::lighting.spotlights.front().getShadow().getPV());
 	}
 
-	for (Object3D* object : Data::getInstance().getObjects())
+	for (Object3D* object : Data::instance().getObjects())
 		object->draw(*sp);
 
 	Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
-	float zoomDistance = Data::getInstance().getZoomDistance();
+	float zoomDistance = Data::instance().getZoomDistance();
 	if (zoomDistance < 1e-6f) zoomDistance = Display::display.observerCamera.FAR_PLANE_DISTANCE;
 	Display::horizon->setScale(vec3(zoomDistance));
 	Display::horizon->draw(*sp);

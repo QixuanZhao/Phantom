@@ -9,13 +9,13 @@ void Lighting::updateShadow()
 	for (ParallelLight& pl : parallelLights) {
 		OrthographicShadow& shadow = pl.getShadow();
 		shadow.setPosition(
-			Data::getInstance().getZoomTarget()
-			- shadow.getDirection() * Data::getInstance().getZoomDistance() / 1.7f
+			Data::instance().getZoomTarget()
+			- shadow.getDirection() * Data::instance().getZoomDistance() / 1.7f
 		);
 
 		shadow.setWidthAndHeight(
-			Data::getInstance().getZoomDistance(),
-			Data::getInstance().getZoomDistance()
+			Data::instance().getZoomDistance(),
+			Data::instance().getZoomDistance()
 		);
 
 		shadow.requireUpdate();

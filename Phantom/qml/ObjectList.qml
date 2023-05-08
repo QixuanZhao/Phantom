@@ -71,6 +71,7 @@ ListView {
 
         RoundButton {
             id: visibleButton
+            enabled: !pickedButton.checked
             flat: true
             checkable: true
             checked: true
@@ -87,6 +88,19 @@ ListView {
             onDoubleClicked: {
                 if (controller.cameraType === Controller.CameraType.Observer)
                     controller.camera.zoom(name);
+            }
+        }
+        RoundButton {
+            id: pickedButton
+            enabled: visibleButton.checked
+            highlighted: checked
+            icon.source: "qrc:/static/res/icons/drag_pan_FILL0_wght400_GRAD0_opsz48.svg"
+            display: AbstractButton.IconOnly
+            checkable: true
+            checked: false
+            onCheckedChanged: {
+                if (checked) controller.data.pick(name)
+                else controller.data.release()
             }
         }
         RoundButton {

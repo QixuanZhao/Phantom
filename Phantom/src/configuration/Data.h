@@ -8,7 +8,7 @@ class Object3D;
 class Data
 {
 private:
-	static Data instance;
+	static Data data;
 
 private:
 	inline Data() { }
@@ -18,10 +18,12 @@ protected:
 
 	AABB aabb;
 
+	QString pickedObjectName = QStringLiteral("");
+
 	void computeAABB();
 
 public:
-	inline static Data& getInstance() { return instance; }
+	inline static Data& instance() { return data; }
 
 	inline QMap<QString, Object3D*>& getObjects() { return objects; }
 
@@ -30,6 +32,19 @@ public:
 	inline const AABB& getAabb() const { return aabb; }
 	inline vec3 getZoomTarget() const { return (aabb.max + aabb.min) / 2.0f; }
 	inline float getZoomDistance() const { return glm::max(glm::distance(aabb.max, aabb.min), 10.0f); }
+
+	inline void pickObject(const QString& name) {
+		pickedObjectName = name;
+	}
+
+	inline void releaseObject() {
+		pickedObjectName = QStringLiteral("");
+	}
+
+	inline Object3D* pickedObject() const {
+		if (objects.contains(pickedObjectName)) return objects[pickedObjectName];
+		else return nullptr;
+	}
 
 	void zoom(CoordinateSystem& axes) const;
 	void zoom(ObserverCamera& camera) const;

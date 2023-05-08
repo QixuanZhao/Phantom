@@ -57,7 +57,7 @@ void UnidirectionalShadow::updateDepth(ShaderProgram* sp)
     sp->set("blending", false);
 
     glLineWidth(1.0f);
-    for (Object3D* object : Data::getInstance().getObjects()) 
+    for (Object3D* object : Data::instance().getObjects()) 
         object->draw(*sp);
 
     sp->set("blending", true);
@@ -66,7 +66,7 @@ void UnidirectionalShadow::updateDepth(ShaderProgram* sp)
     sp->set("source", 0);
 
     glCullFace(GL_BACK);
-    for (Object3D* object : Data::getInstance().getObjects())
+    for (Object3D* object : Data::instance().getObjects())
         object->draw(*sp);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

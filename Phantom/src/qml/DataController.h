@@ -29,6 +29,8 @@ public:
 	Q_INVOKABLE void setRoughness(const QString& objectName, qreal roughness);
 	Q_INVOKABLE void setK(const QString& objectName, const QString& surfaceName, qreal K);
 	Q_INVOKABLE void setK(const QString& objectName, qreal K);
+	Q_INVOKABLE void pick(const QString& objectName);
+	Q_INVOKABLE void release();
 protected:
-	Data& data = Data::getInstance();
+	Data& data = Data::instance();
 };

@@ -273,3 +273,13 @@ void DataController::setK(const QString& objectName, qreal K)
 		surface->setK(vec3(float(K)));
 }
 
+void DataController::pick(const QString& objectName)
+{
+	Data::instance().pickObject(objectName);
+}
+
+void DataController::release()
+{
+	Data::instance().releaseObject();
+}
+

@@ -5,10 +5,10 @@ void ObserverCameraController::zoom(const QString& objectName, const QString& su
 	if (!camera) return;
 
 	if (objectName.isNull()) {
-		Data::getInstance().zoom(*camera);
+		Data::instance().zoom(*camera);
 	}
 	else {
-		QMap<QString, Object3D*>& objectMap = Data::getInstance().getObjects();
+		QMap<QString, Object3D*>& objectMap = Data::instance().getObjects();
 		if (objectMap.count(objectName) <= 0) return;
 
 		if (surfaceName.isNull()) {

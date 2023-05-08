@@ -44,8 +44,10 @@ public:
 	inline const QString& getName() const { return name; }
 	inline const void setName(const QString& name) { this->name = name; }
 
-	inline vec3 getZoomTarget() const { return translation + (aabb.max + aabb.min) / 2.0f; }
+	inline vec3 getZoomTarget() const { return translation + center(); }
 	inline float getZoomDistance() const { return glm::length(aabb.max - aabb.min); }
+
+	inline vec3 center() const { return (aabb.max + aabb.min) / 2.0f; }
 
 	void zoom(ObserverCamera& camera) const;
 	void zoom() const;
@@ -57,10 +59,15 @@ public:
 	inline GLenum getCulledFace() const { return culledFace; }
 
 	inline const vec3& getTranslation() const { return translation; }
-	inline void setTranslation(const vec3& translation) {
+	inline bool setTranslation(const vec3& translation) {
+		if (this->translation == translation) 
+			return false;
+
 		this->translation = translation;
 		for (Surface* surface : surfaces)
 			surface->setTranslation(translation);
+
+		return true;
 	}
 
 	inline void draw(ShaderProgram& sp) {
