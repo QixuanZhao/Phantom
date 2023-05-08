@@ -44,4 +44,3 @@ Metallic, roughness, and distinction coefficient are used for PBR.
 ## Problems
 - Only support triangle meshes
 - No surface texture support
-- 3D models are unmovable
