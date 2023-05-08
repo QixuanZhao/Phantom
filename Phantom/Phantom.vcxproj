@@ -274,7 +274,8 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(QtToolsPath)\windeployqt.exe" --list target --no-system-d3d-compiler --no-virtualkeyboard --no-patchqt --qmldir "$(ProjectDir)qml" --no-translations "$(TargetPath)"</Command>
+      <Command>"$(QtToolsPath)\windeployqt.exe" --list target --no-system-d3d-compiler --no-virtualkeyboard --no-patchqt --qmldir "$(ProjectDir)qml" --no-translations "$(TargetPath)"
+xcopy /y "$(ProjectDir)res\shaders\*" "$(TargetDir)res\shaders\"</Command>
       <Message>旧事件为 xcopy /y "$(ProjectDir)dll\*.dll" "$(TargetDir)" </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
