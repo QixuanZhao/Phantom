@@ -22,7 +22,7 @@ After opening the file, the 3D model will show in the "3D Objects" list.
 ![image](https://user-images.githubusercontent.com/77724175/236733187-f32b2c64-f9d2-48ef-b7ac-a907b3ab5286.png)
 
 Click the scene to bring it into focus and press <kbd>Ctrl</kbd> to capture the cursor (press <kbd>Ctrl</kbd> again to release the cursor). With the cursor captured, the camera behaves like a first-person shooter (FPS) camera, allowing you to move the camera using the <kbd>W</kbd><kbd>S</kbd><kbd>A</kbd><kbd>D</kbd> or arrow keys, hold <kbd>Shift</kbd> to accelerate, and use the mouse wheel to zoom in and out.
-6. Add analytical light sources:
+7. Let there be light:
 ![image](https://user-images.githubusercontent.com/77724175/236735947-7f453004-ca14-4751-bff4-778ae6ff3cff.png)
 
 Configure parallel light:
@@ -43,7 +43,7 @@ Unhold the light source, and move to another position to observe it.
 Do the same thing to other light sources:
 ![image](https://user-images.githubusercontent.com/77724175/236736671-7e6e88eb-dc3f-4407-800e-f98d721a8b27.png)
 
-7. Configure the 3D object:
+8. Configure the 3D object:
 ![image](https://user-images.githubusercontent.com/77724175/236736731-e984621b-c289-47c1-8f32-74820a5bdede.png)
 
 Metallic, roughness, and distinction coefficient are used for PBR.
