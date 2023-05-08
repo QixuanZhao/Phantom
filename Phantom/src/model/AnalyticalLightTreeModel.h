@@ -19,6 +19,9 @@ signals:
 protected slots:
 	void notifySizeChange();
 
+public slots:
+	void retranslate();
+
 public:
 	qint8 count() const noexcept;
 

@@ -30,6 +30,16 @@ void AnalyticalLightTreeModel::notifySizeChange()
 	emit sizeChanged(count());
 }
 
+void AnalyticalLightTreeModel::retranslate()
+{
+	QModelIndex pli = index(0, 0, QModelIndex());
+	QModelIndex sli = index(1, 0, QModelIndex());
+	QModelIndex ssi = index(2, 0, QModelIndex());
+	emit dataChanged(pli, pli, { Qt::UserRole + 1 });
+	emit dataChanged(sli, sli, { Qt::UserRole + 1 });
+	emit dataChanged(ssi, ssi, { Qt::UserRole + 1 });
+}
+
 qint8 AnalyticalLightTreeModel::count() const noexcept
 {
 	return parallelLightModel->count() + pointLightModel->count() + spotlightModel->count();
