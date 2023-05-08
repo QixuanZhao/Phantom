@@ -342,7 +342,10 @@ void MainRenderer::render()
 
     index = 0;
     for (ShadowCastingSpotlight& ss : Lighting::lighting.spotlights) {
-        if (index == Lighting::lighting.pickedSpotlightIndex) ss.setPosition(Display::display.mouseCamera().getTarget());
+        if (index == Lighting::lighting.pickedSpotlightIndex) {
+            ss.setPosition(Display::display.mouseCamera().getTarget());
+            ss.setDirection(Display::display.mouseCamera().getFront());
+        }
         ss.configureShaderProgram(currentSp, QStringLiteral("spotlights[%1]").arg(index));
         glActiveTexture(GL_TEXTURE9 + count);
         glBindTexture(GL_TEXTURE_2D, ss.getShadow().getShadowTexture());
