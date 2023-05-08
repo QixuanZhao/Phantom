@@ -56,10 +56,6 @@ TreeView {
                 visible: isSpotlight(dialog.type) || isParallelLight(dialog.type)
             }
 
-            Label {
-                text: "%1, %2".arg(spotlightCutoffGroupBox.innerCutoff).arg(spotlightCutoffGroupBox.outerCutoff)
-            }
-
             CutoffGroupBox {
                 id: spotlightCutoffGroupBox
                 visible: isSpotlight(dialog.type)

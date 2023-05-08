@@ -475,8 +475,8 @@ void MainRenderer::render()
     //textureSp->set("textureBuffer", shadowTextureImageUnit);
     //Display::screenQuad->draw(*textureSp);
 
-    glActiveTexture(GL_TEXTURE0);
-    textureSp->set("textureBuffer", 0);
+    //glActiveTexture(GL_TEXTURE0);
+    //textureSp->set("textureBuffer", 0);
 
     //glViewport(3 * viewportSize.width() / 4, 0, viewportSize.width() / 4, viewportSize.height() / 4);
     //glBindTexture(GL_TEXTURE_2D, gBuffer->positionTexture());
@@ -510,23 +510,23 @@ void MainRenderer::render()
     //textureSp->set("exposure", Display::display.exposure);
     //Display::screenQuad->draw(*textureSp);
 
-    if (Lighting::lighting.spotlights.size() > 0) {
-        glViewport(0, 0, viewportSize.width() / 2, viewportSize.height() / 2);
-        glBindTexture(GL_TEXTURE_2D, Lighting::lighting.spotlights.front().getShadow().getDepthTexture());
-        textureSp->set("monochrome", true);
-        textureSp->set("normalizing", false);
-        textureSp->set("alpha", Debug::getInstance().getHubAlpha());
-        textureSp->set("exposure", Display::display.exposure);
-        Display::screenQuad->draw(*textureSp);
+    //if (Lighting::lighting.spotlights.size() > 0) {
+    //    glViewport(0, 0, viewportSize.width() / 2, viewportSize.height() / 2);
+    //    glBindTexture(GL_TEXTURE_2D, Lighting::lighting.spotlights.front().getShadow().getDepthTexture());
+    //    textureSp->set("monochrome", true);
+    //    textureSp->set("normalizing", false);
+    //    textureSp->set("alpha", Debug::getInstance().getHubAlpha());
+    //    textureSp->set("exposure", Display::display.exposure);
+    //    Display::screenQuad->draw(*textureSp);
 
-        glViewport(viewportSize.width() / 2, 0, viewportSize.width() / 2, viewportSize.height() / 2);
-        glBindTexture(GL_TEXTURE_2D, Lighting::lighting.spotlights.front().getShadow().getShadowTexture());
-        textureSp->set("monochrome", true);
-        textureSp->set("normalizing", false);
-        textureSp->set("alpha", Debug::getInstance().getHubAlpha());
-        textureSp->set("exposure", Display::display.exposure);
-        Display::screenQuad->draw(*textureSp);
-    }
+    //    glViewport(viewportSize.width() / 2, 0, viewportSize.width() / 2, viewportSize.height() / 2);
+    //    glBindTexture(GL_TEXTURE_2D, Lighting::lighting.spotlights.front().getShadow().getShadowTexture());
+    //    textureSp->set("monochrome", true);
+    //    textureSp->set("normalizing", false);
+    //    textureSp->set("alpha", Debug::getInstance().getHubAlpha());
+    //    textureSp->set("exposure", Display::display.exposure);
+    //    Display::screenQuad->draw(*textureSp);
+    //}
 
     glDisable(GL_BLEND);
 

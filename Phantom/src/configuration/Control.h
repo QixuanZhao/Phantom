@@ -23,6 +23,7 @@ public:
 	bool catchMouse = false;
 
 	QQmlApplicationEngine engine;
+	QJSEngine javascript;
 	QTranslator translator;
 
 	void retranslate(const QLocale& locale);
