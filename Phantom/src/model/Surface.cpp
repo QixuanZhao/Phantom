@@ -227,6 +227,7 @@ void Surface::draw(ShaderProgram& sp) {
 
     sp.use();
     mat4 model(1.0f);
+    model = glm::mat4_cast(rotation);
     model = glm::translate(model, translation);
     model = glm::scale(model, scale);
     sp.set("model", model);

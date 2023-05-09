@@ -72,6 +72,9 @@ public:
     inline const vec3& getTranslation() const { return translation; }
     inline void setTranslation(const vec3& translate) { this->translation = translate; }
 
+    inline const quat& getRotation() const { return rotation; }
+    inline void setRotation(const quat& rotation) { this->rotation = rotation; }
+
     inline const vec3& getScale() const { return scale; }
     inline void setScale(const vec3& scale) { this->scale = scale; }
 
@@ -110,8 +113,9 @@ protected:
     float shininess = 64.0f; 
 
     vec3 translation = vec3(0.0f);
-    vec3 rotateAngles = vec3(0.0f);
     vec3 scale = vec3(1.0f);
+    quat rotation = quat(1.0f, 0.0f, 0.0f, 0.0f);
+
     vec3 colour = vec3(1.0f);
     bool showBorder = false;
 

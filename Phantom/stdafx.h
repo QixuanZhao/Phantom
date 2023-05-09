@@ -44,6 +44,8 @@ using std::pair;
 using std::string;
 using std::wstring;
 
+using glm::quat;
+
 using glm::vec;
 using glm::vec2;
 using glm::vec3;

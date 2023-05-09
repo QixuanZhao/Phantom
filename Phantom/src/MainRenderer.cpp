@@ -289,8 +289,6 @@ void MainRenderer::render()
     pbrSp->set("input_metallic_roughness", 6);
     pbrSp->set("input_distinction_coefficient", 8);
 
-    ShaderProgram* currentSp = pbrSp;
-
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, gBuffer->positionTexture());
 
@@ -312,44 +310,44 @@ void MainRenderer::render()
     glActiveTexture(GL_TEXTURE8);
     glBindTexture(GL_TEXTURE_2D, gBuffer->distinctionCoefficientTexture());
 
-    currentSp->set("parallelLightShadowMap", 0);
-    currentSp->set("pointLightShadowMap", 1);
+    pbrSp->set("parallelLightShadowMap", 0);
+    pbrSp->set("pointLightShadowMap", 1);
 
-    currentSp->set("input_position", 2);
-    currentSp->set("input_normal", 3);
-    currentSp->set("input_albedo", 4);
-    currentSp->set("input_depth", 5);
+    pbrSp->set("input_position", 2);
+    pbrSp->set("input_normal", 3);
+    pbrSp->set("input_albedo", 4);
+    pbrSp->set("input_depth", 5);
 
-    currentSp->set("ambientOcclusionMap", 7);
-    currentSp->set("ssaoEnabled", Lighting::lighting.ssaoEnabled);
+    pbrSp->set("ambientOcclusionMap", 7);
+    pbrSp->set("ssaoEnabled", Lighting::lighting.ssaoEnabled);
 
-    Display::display.flashCamera().getFlash().configureShaderProgram(currentSp, "cameraFlash");
+    Display::display.flashCamera().getFlash().configureShaderProgram(pbrSp, "cameraFlash");
 
-    currentSp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
+    pbrSp->set("parallelLightCount", int(Lighting::lighting.parallelLights.size()));
 
     int index = 0;
     int count = 0;
     for (ParallelLight& pl: Lighting::lighting.parallelLights) {
-        pl.configureShaderProgram(currentSp, QStringLiteral("parallelLights[%1]").arg(index));
+        pl.configureShaderProgram(pbrSp, QStringLiteral("parallelLights[%1]").arg(index));
         glActiveTexture(GL_TEXTURE9 + count);
         glBindTexture(GL_TEXTURE_2D, pl.getShadow().getShadowTexture());
-        currentSp->set(QStringLiteral("parallelLightShadowMaps[%1]").arg(index), 9 + count);
+        pbrSp->set(QStringLiteral("parallelLightShadowMaps[%1]").arg(index), 9 + count);
         index++, count++;
     }
 
-    currentSp->set("pointLightCount", int(Lighting::lighting.pointLights.size()));
+    pbrSp->set("pointLightCount", int(Lighting::lighting.pointLights.size()));
 
     index = 0;
     for (ShadowCastingPointLight& sl : Lighting::lighting.pointLights) {
         if (index == Lighting::lighting.pickedPointLightIndex) sl.setPosition(Display::display.mouseCamera().getTarget());
-        sl.configureShaderProgram(currentSp, QStringLiteral("pointLights[%1]").arg(index));
+        sl.configureShaderProgram(pbrSp, QStringLiteral("pointLights[%1]").arg(index));
         glActiveTexture(GL_TEXTURE9 + count);
         glBindTexture(GL_TEXTURE_2D, sl.getShadow().getShadowTexture());
-        currentSp->set<int>(QStringLiteral("pointLightShadowMaps[%1]").arg(index), 9 + count);
+        pbrSp->set<int>(QStringLiteral("pointLightShadowMaps[%1]").arg(index), 9 + count);
         index++, count++;
     }
 
-    currentSp->set("spotlightCount", int(Lighting::lighting.spotlights.size()));
+    pbrSp->set("spotlightCount", int(Lighting::lighting.spotlights.size()));
 
     index = 0;
     for (ShadowCastingSpotlight& ss : Lighting::lighting.spotlights) {
@@ -357,23 +355,23 @@ void MainRenderer::render()
             ss.setPosition(Display::display.mouseCamera().getTarget());
             ss.setDirection(Display::display.mouseCamera().getFront());
         }
-        ss.configureShaderProgram(currentSp, QStringLiteral("spotlights[%1]").arg(index));
+        ss.configureShaderProgram(pbrSp, QStringLiteral("spotlights[%1]").arg(index));
         glActiveTexture(GL_TEXTURE9 + count);
         glBindTexture(GL_TEXTURE_2D, ss.getShadow().getShadowTexture());
-        currentSp->set<int>(QStringLiteral("spotlightShadowMaps[%1]").arg(index), 9 + count);
+        pbrSp->set<int>(QStringLiteral("spotlightShadowMaps[%1]").arg(index), 9 + count);
         index++, count++;
     }
 
-    currentSp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
+    pbrSp->set("ambientLight", Lighting::lighting.ambientLight.getAmbient());
 
-    currentSp->set("cameraPosition", Display::display.mouseCamera().getPosition());
-    currentSp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
+    pbrSp->set("cameraPosition", Display::display.mouseCamera().getPosition());
+    pbrSp->set("cameraFlashOn", Display::display.flashCamera().isFlashOn());
 
-    currentSp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
+    pbrSp->set("reflectingAtBothSide", Lighting::lighting.bilateralReflective);
         
-    currentSp->set("shadowEnabled", Lighting::lighting.shadowSettings.enabled);
+    pbrSp->set("shadowEnabled", Lighting::lighting.shadowSettings.enabled);
 
-    Display::screenQuad->draw(*currentSp);
+    Display::screenQuad->draw(*pbrSp);
 
     glBlitNamedFramebuffer(gBuffer->getFramebuffer(), hdrFramebuffer,
         0, 0, Display::display.TEXTURE_WIDTH, Display::display.TEXTURE_HEIGHT,

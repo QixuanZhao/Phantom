@@ -78,8 +78,16 @@ void GBuffer::render()
 		sp->set("lightPV", Lighting::lighting.spotlights.front().getShadow().getPV());
 	}
 
-	for (Object3D* object : Data::instance().getObjects())
+	for (Object3D* object : Data::instance().getObjects()) {
+		float theta = 0.01f;
+		float cosineTheta = glm::cos(glm::radians(theta));
+		float sineTheta = glm::sin(glm::radians(theta));
+		vec3 axis = glm::normalize(vec3(0.0f, 0.0f, 1.0f));
+		object->applyRotation(quat(cosineTheta, sineTheta * axis));
 		object->draw(*sp);
+	}
+
+	Lighting::lighting.updateShadow();
 
 	Display::horizon->setColour(glm::mix(Display::display.backgroundColour, vec3(0.5f), 0.1));
 	float zoomDistance = Data::instance().getZoomDistance();

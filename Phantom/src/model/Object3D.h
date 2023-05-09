@@ -14,8 +14,8 @@ protected:
 	AABB aabb;
 
 	vec3 translation = vec3(0.0f);
-	vec3 rotateAngles = vec3(0.0f);
 	vec3 scale = vec3(1.0f);
+	quat rotation = quat(1.0f, 0.0f, 0.0f, 0.0f);
 
 	bool faceCullingEnabled = false;
 
@@ -68,6 +68,19 @@ public:
 			surface->setTranslation(translation);
 
 		return true;
+	}
+
+	inline const quat& getRotation() const { return rotation; }
+	inline void setRotation(const quat& rotation) {
+		this->rotation = rotation;
+		for (Surface* surface : surfaces)
+			surface->setRotation(rotation);
+	}
+
+	inline void applyRotation(const quat& rotation) {
+		this->rotation *= rotation;
+		for (Surface* surface : surfaces)
+			surface->setRotation(this->rotation);
 	}
 
 	inline void draw(ShaderProgram& sp) {
