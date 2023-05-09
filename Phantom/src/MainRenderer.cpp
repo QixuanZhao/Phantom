@@ -215,12 +215,18 @@ void MainRenderer::render()
 
     Object3D* pickedObject = Data::instance().pickedObject();
     if (pickedObject) {
-        if (pickedObject->setTranslation(
+        pickedObject->setTranslation(
             Display::display.mouseCamera().getPosition() +
             pickedObject->getZoomDistance() * Display::display.mouseCamera().getFront()
-        )) {
-            Lighting::lighting.updateShadow();
-        }
+        );
+
+        float theta = 0.01f * deltaTime;
+        float cosineTheta = glm::cos(glm::radians(theta));
+        float sineTheta = glm::sin(glm::radians(theta));
+        vec3 axis = glm::normalize(vec3(0.0f, 0.0f, 1.0f));
+        pickedObject->applyRotation(quat(cosineTheta, sineTheta * axis));
+
+        Lighting::lighting.updateShadow();
     }
 
     // depth test

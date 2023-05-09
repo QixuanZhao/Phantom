@@ -79,11 +79,6 @@ void GBuffer::render()
 	}
 
 	for (Object3D* object : Data::instance().getObjects()) {
-		float theta = 0.01f * Control::instance().deltaTime;
-		float cosineTheta = glm::cos(glm::radians(theta));
-		float sineTheta = glm::sin(glm::radians(theta));
-		vec3 axis = glm::normalize(vec3(0.0f, 0.0f, 1.0f));
-		object->applyRotation(quat(cosineTheta, sineTheta * axis));
 		object->draw(*sp);
 	}
 

@@ -10,10 +10,9 @@ QString DataController::load(const QUrl& url)
 		object = new Object3D(surface->getName());
 		object->insertSurface(surface);
 	}
-	else {
-		// tell the idiot user he chose the wrong file
-		return QString();
-	}
+	else return QString();
+
+	object->setTranslation(vec3(0.0f, 0.0f, object->center().z));
 
 	data.insertObject(object);
 	return object->getName();
