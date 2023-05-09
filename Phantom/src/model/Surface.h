@@ -6,6 +6,7 @@
 
 class Display;
 class ObserverCamera;
+class Object3D;
 
 class Surface : protected GLF
 {
@@ -33,6 +34,8 @@ public:
     virtual ~Surface();
 
     void setupGL();
+
+    void configureShaderProgram(ShaderProgram& sp);
 
     void draw(ShaderProgram& sp);
     void draw(ShaderProgram& sp, int id);
@@ -72,17 +75,24 @@ public:
     inline const vec3& getTranslation() const { return translation; }
     inline void setTranslation(const vec3& translate) { this->translation = translate; }
 
+    inline const vec3& getScale() const { return scale; }
+    inline void setScale(const vec3& scale) { this->scale = scale; }
+
     inline const quat& getRotation() const { return rotation; }
     inline void setRotation(const quat& rotation) { this->rotation = rotation; }
 
-    inline const vec3& getScale() const { return scale; }
-    inline void setScale(const vec3& scale) { this->scale = scale; }
+    inline const vec3& getCenter() const { return center; }
 
     void zoom(ObserverCamera& camera) const;
     void zoom() const;
 
     inline bool isAvailable() const { return available; }
     inline void setAvailable(bool available) { this->available = available; }
+
+    inline void setObject(const Object3D* object) {
+        this->object = object;
+    }
+    inline const Object3D* getObject() const { return object; }
 
 protected:
     GLuint vertexArray;
@@ -115,9 +125,12 @@ protected:
     vec3 translation = vec3(0.0f);
     vec3 scale = vec3(1.0f);
     quat rotation = quat(1.0f, 0.0f, 0.0f, 0.0f);
+    vec3 center = vec3(0.0f);
 
     vec3 colour = vec3(1.0f);
     bool showBorder = false;
+
+    const Object3D* object = nullptr;
 
     void loadModel(const QString& path);
     void loadModel(const vector<vector<vec3>>& faces);

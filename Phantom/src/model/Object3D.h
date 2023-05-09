@@ -84,13 +84,17 @@ public:
 	}
 
 	inline void draw(ShaderProgram& sp) {
-		for (Surface* surface : surfaces)
+		for (Surface* surface : surfaces) {
+			surface->setTranslation(translation);
 			surface->draw(sp);
+		}
 	}
 
 	inline void draw(ShaderProgram& sp, int id) {
-		for (Surface* surface : surfaces)
+		for (Surface* surface : surfaces) {
+			surface->setTranslation(translation);
 			surface->draw(sp, id);
+		}
 	}
 };
 

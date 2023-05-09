@@ -34,6 +34,22 @@ void Surface::setupGL()
     available = true;
 }
 
+void Surface::configureShaderProgram(ShaderProgram& sp)
+{
+    sp.use();
+    mat4 model(1.0f);
+    if (object) model = glm::translate(mat4(1.0f), -object->center());
+    model = glm::mat4_cast(rotation) * model;
+    model = glm::translate(mat4(1.0f), translation) * model;
+    model = glm::scale(model, scale);
+    sp.set("model", model);
+    sp.set("originalColour", colour);
+    sp.set("shininess", shininess);
+    sp.set("metallic", metallic);
+    sp.set("roughness", roughness);
+    sp.set("K", K);
+}
+
 Surface::Surface(const QString& path)
 {
     loadModel(path);
@@ -225,17 +241,8 @@ void Surface::draw(ShaderProgram& sp) {
     //glNamedBufferData(vertexBuffer, vertexData.size() * sizeof(Vertex), &vertexData[0], GL_DYNAMIC_DRAW);
     glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 
-    sp.use();
-    mat4 model(1.0f);
-    model = glm::mat4_cast(rotation);
-    model = glm::translate(model, translation);
-    model = glm::scale(model, scale);
-    sp.set("model", model);
-    sp.set("originalColour", colour);
-    sp.set("shininess", shininess);
-    sp.set("metallic", metallic);
-    sp.set("roughness", roughness);
-    sp.set("K", K);
+    configureShaderProgram(sp);
+
     glBindVertexArray(vertexArray);
     glDrawArrays(GL_TRIANGLES, 0, vertexData.size());
     glBindVertexArray(0);
@@ -249,16 +256,8 @@ void Surface::draw(ShaderProgram& sp, int id)
     //glNamedBufferData(vertexBuffer, vertexData.size() * sizeof(Vertex), &vertexData[0], GL_DYNAMIC_DRAW);
     glPolygonMode(GL_FRONT_AND_BACK, polygonMode);
 
-    sp.use();
-    mat4 model(1.0f);
-    model = glm::translate(model, translation);
-    model = glm::scale(model, scale);
-    sp.set("model", model);
-    sp.set("originalColour", colour);
-    sp.set("shininess", shininess);
-    sp.set("metallic", metallic);
-    sp.set("roughness", roughness);
-    sp.set("K", K);
+    configureShaderProgram(sp);
+
     glBindVertexArray(vertexArray);
     glDrawArraysInstanced(GL_TRIANGLES, 0, vertexData.size(), id);
     glBindVertexArray(0);

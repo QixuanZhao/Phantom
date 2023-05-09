@@ -59,8 +59,9 @@ protected:
 
 private:
     bool firstFrame = true;
-	qint64 lastFrame = 0;
-    qint64 deltaTime = 1;
+
+	qint64& lastFrame = Control::instance().lastFrame;
+    qint64& deltaTime = Control::instance().deltaTime;
 
     QQuickWindow* window = nullptr;
     QSizeF viewportSize;

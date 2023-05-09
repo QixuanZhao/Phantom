@@ -26,5 +26,8 @@ public:
 	QJSEngine javascript;
 	QTranslator translator;
 
+	qint64 lastFrame = 0;
+	qint64 deltaTime = 1;
+
 	void retranslate(const QLocale& locale);
 };

@@ -217,8 +217,7 @@ void MainRenderer::render()
     if (pickedObject) {
         if (pickedObject->setTranslation(
             Display::display.mouseCamera().getPosition() +
-            pickedObject->getZoomDistance() * Display::display.mouseCamera().getFront() -
-            pickedObject->center()
+            pickedObject->getZoomDistance() * Display::display.mouseCamera().getFront()
         )) {
             Lighting::lighting.updateShadow();
         }

@@ -10,6 +10,7 @@ void Object3D::insertSurface(Surface* surface) {
 	surface->setName(name);
 
 	surfaces.insert(name, surface);
+	surface->setObject(this);
 
 	if (surfaces.size() == 1) aabb = surface->getAABB();
 	else {
