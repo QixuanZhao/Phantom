@@ -155,7 +155,29 @@ void Surface::loadModel(const QString& path) {
             }
 
             if (face->vertexIndices.size() == 3) faces.push_back(face);
-            else delete face;
+            else if (face->vertexIndices.size() > 3) {
+                for (int i = 2; i < face->vertexIndices.size(); i++) {
+                    Face* triangle = new Face();
+                    triangle->vertexIndices.push_back(face->vertexIndices[0]);
+                    triangle->vertexIndices.push_back(face->vertexIndices[i - 1]);
+                    triangle->vertexIndices.push_back(face->vertexIndices[i]);
+
+                    if (hasVn) {
+                        triangle->vertexNormalIndices.push_back(face->vertexNormalIndices[0]);
+                        triangle->vertexNormalIndices.push_back(face->vertexNormalIndices[i - 1]);
+                        triangle->vertexNormalIndices.push_back(face->vertexNormalIndices[i]);
+                    }
+
+                    if (hasVt) {
+                        triangle->vertexTextureIndices.push_back(face->vertexTextureIndices[0]);
+                        triangle->vertexTextureIndices.push_back(face->vertexTextureIndices[i - 1]);
+                        triangle->vertexTextureIndices.push_back(face->vertexTextureIndices[i]);
+                    }
+
+                    faces.push_back(triangle);
+                }
+                delete face;
+            }
         }
     }
 }
