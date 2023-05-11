@@ -42,5 +42,4 @@ Metallic, roughness, and distinction coefficient are used for PBR.
 ![image](https://user-images.githubusercontent.com/77724175/236736858-f86ce9c5-a509-4677-83e5-0dc05b4999a6.png)
 
 ## Problems
-- Only support triangle meshes
 - No surface texture support
